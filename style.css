@@ -14,8 +14,14 @@
   border-top: 0px solid #555;
 }
 .prebuiltPizza {
-  margin: 0% auto;
+  margin: 4% auto;
   text-align: center;
+  width: 100px;
+}
+.prebuiltPizzaPicture {
+  width: 100px;
+  height: 100px;
+  background-color: #000;
 }
 
 #titleBar {
@@ -55,4 +61,15 @@
 #prebuiltHolder {
   display: flex;
   flex-direction: row;
+}
+#endOrder {
+  display: flex;
+  flex-direction: row;
+  margin-top: auto;
+  padding: 0% 3%;
+}
+#checkoutBtn {
+  margin: auto 0%;
+  margin-left: auto;
+  height: fit-content;
 }
