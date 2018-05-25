@@ -1,0 +1,58 @@
+.bold {
+  font-weight: bold;
+}
+.pizzaTab {
+  display: flex;
+  flex: 1;
+  border-top: 1px solid #555;
+  border-right: 1px solid #555;
+}
+.pizzaTab p {
+  margin: auto;
+}
+.pizzaTab:first-child {
+  border-top: 0px solid #555;
+}
+.prebuiltPizza {
+  margin: 0% auto;
+  text-align: center;
+}
+
+#titleBar {
+  text-align: center;
+  background-color: #77f;
+  margin: -8px;
+  margin-bottom: 0px;
+  padding: 5px;
+}
+#orderingArea {
+  display: flex;
+  flex-direction: row;
+  height: 490px;
+  width: 96%;
+  margin: 2% 2%;
+  background-color: #999;
+  border: 1px solid #555;
+  border-radius: 20px;
+}
+#orderingTabs {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+#orderDesc {
+  display: flex;
+  flex-direction: column;
+  flex: 6;
+}
+#tabTitle {
+  text-align: center;
+  border-bottom: 1px solid #555;
+}
+#tabTitle {
+  margin: 0%;
+}
+#prebuiltHolder {
+  display: flex;
+  flex-direction: row;
+}
