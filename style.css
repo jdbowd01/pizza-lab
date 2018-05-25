@@ -16,12 +16,13 @@
 .prebuiltPizza {
   margin: 4% auto;
   text-align: center;
-  width: 100px;
+  width: 15%;
 }
 .prebuiltPizzaPicture {
-  width: 100px;
-  height: 100px;
+  width: 10vw;
+  height: 10vw;
   background-color: #000;
+  margin: 0% auto;
 }
 
 #titleBar {
