@@ -69,6 +69,12 @@
   margin-top: auto;
   padding: 0% 3%;
 }
+#orderBtn {
+  display: none;
+  margin: auto 0%;
+  margin-left: auto;
+  height: fit-content;
+}
 #checkoutBtn {
   margin: auto 0%;
   margin-left: auto;
