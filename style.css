@@ -1,6 +1,11 @@
 .bold {
   font-weight: bold;
 }
+.btn {
+  cursor: pointer;
+  padding: 6px;
+  background: linear-gradient(#4b5, #4d5);
+}
 .pizzaTab {
   display: flex;
   flex: 1;
