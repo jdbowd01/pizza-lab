@@ -26,8 +26,8 @@
 .prebuiltPizzaPicture {
   width: 10vw;
   height: 10vw;
-  background-color: #000;
   margin: 0% auto;
+  object-fit: contain;
 }
 
 #titleBar {
@@ -60,13 +60,57 @@
 #tabTitle {
   text-align: center;
   border-bottom: 1px solid #555;
-}
-#tabTitle {
   margin: 0%;
 }
 #prebuiltHolder {
   display: flex;
   flex-direction: row;
+}
+#prebuiltPizza1 img {
+  background: url(images/toppings/sausage-normal.png),
+  url(images/toppings/pepperoni-normal.png),
+  url(images/toppings/ham-normal.png),
+  url(images/cheeses/normal.png),
+  url(images/sauces/normal.png),
+  url(images/crusts/regular.png),
+  #fff;
+}
+#prebuiltPizza2 img {
+  background: url(images/toppings/spinach-double.png),
+  url(images/toppings/peppers-double.png),
+  url(images/toppings/onions-double.png),
+  url(images/cheeses/double.png),
+  url(images/sauces/light.png),
+  url(images/crusts/garlic.png),
+  #fff;
+}
+#prebuiltPizza3 img {
+  background: url(images/toppings/jalapeno-light.png),
+  url(images/toppings/bacon-normal.png),
+  url(images/toppings/chicken-normal.png),
+  url(images/cheeses/double.png),
+  url(images/sauces/normal.png),
+  url(images/crusts/stuffed.png),
+  #fff;
+}
+#prebuiltPizza4 img {
+  background: url(images/toppings/sausage-normal.png),
+  url(images/toppings/pepperoni-normal.png),
+  url(images/toppings/peppers-normal.png),
+  url(images/toppings/onions-normal.png),
+  url(images/cheeses/normal.png),
+  url(images/sauces/normal.png),
+  url(images/crusts/regular.png),
+  #fff;
+}
+#prebuiltPizza5 img {
+  background: url(images/toppings/peppers-normal.png),
+  url(images/toppings/onions-normal.png),
+  url(images/toppings/anchovies-normal.png),
+  url(images/cheeses/double.png),
+  url(images/sauces/light.png),
+  url(images/crusts/thin.png),
+  #fff;
 }
 #endOrder {
   display: flex;
