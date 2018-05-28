@@ -1,8 +1,18 @@
 var prebuiltPizza = document.getElementsByClassName("pizzaTab")[0];
 var customizePizza = document.getElementsByClassName("pizzaTab")[1];
+var buttons = document.getElementsByClassName("btn");
 
 prebuiltPizza.addEventListener("click", prebuiltTab);
 customizePizza.addEventListener("click", customizeTab);
+
+for(var i = 0; i < buttons.length; i++) {
+  if(buttons[i].innerHTML == "Add to Order") {
+    buttons[i].addEventListener("click", addToOrder);
+  }
+  else if(buttons[i].innerHTML == "Checkout") {
+    buttons[i].addEventListener("click", goToCheckout);
+  }
+}
 
 function prebuiltTab(evt) {
   document.getElementById("tabTitle").children[0].innerHTML = "Prebuilt Pizzas";
@@ -24,6 +34,7 @@ function customizeTab(evt) {
   document.getElementsByClassName("pizzaTab")[1].children[0].style.display = "flex";
   FillPizza();
 }
+
 function FillPizza(){
   var pizza = document.getElementById('pizzaDrawing');
   var crust = new Image(250, 250);
@@ -38,4 +49,12 @@ function FillPizza(){
   pizza.appendChild(crust);
   pizza.appendChild(sauce);
   pizza.appendChild(cheese);
+}
+
+function addToOrder() {
+
+}
+
+function goToCheckout() {
+
 }
