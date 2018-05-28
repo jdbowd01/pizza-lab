@@ -5,6 +5,7 @@
   cursor: pointer;
   padding: 6px;
   background: linear-gradient(#4b5, #4d5);
+  min-width: 40px;
 }
 .pizzaTab {
   display: flex;
@@ -21,13 +22,27 @@
 .prebuiltPizza {
   margin: 4% auto;
   text-align: center;
-  width: 15%;
 }
 .prebuiltPizzaPicture {
   width: 10vw;
   height: 10vw;
+  min-width: 100px;
+  min-height: 100px;
   margin: 0% auto;
   object-fit: contain;
+}
+.toppingsRow{
+  display: flex;
+  flex-direction: row;
+  text-align: left;
+  margin-left: 45px;
+}
+.topping{
+  width: 175px;
+}
+.box{
+  display: flex;
+  border: 1px solid #000;
 }
 
 #titleBar {
@@ -40,7 +55,6 @@
 #orderingArea {
   display: flex;
   flex-direction: row;
-  height: 540px;
   width: 96%;
   margin: 2% 2%;
   background-color: #999;
@@ -129,14 +143,11 @@
   margin-left: auto;
   height: fit-content;
 }
-.box{
-  display: flex;
-  border: 1px solid #000;
-}
 #customHolder{
+  display: none;
   flex-direction: row;
   width: 100%;
-  height: 100%;;
+  height: 100%;
 }
 #pizzaDisplay{
   width: 583px;
@@ -156,10 +167,12 @@
   margin-right: auto;
 }
 #lblBonus{
+  visibility: hidden;
   margin-top: 8px;
   margin-bottom: 8px;
 }
 #lblToppings{
+  visibility: hidden;
   margin-top: 8px;
   margin-bottom: 8px;
 }
@@ -167,17 +180,14 @@
   flex-direction: column;
   text-align: center;
 }
-.toppingsRow{
-  display: flex;
-  flex-direction: row;
-  text-align: left;
-  margin-left: 45px;
-}
-.topping{
-  width: 175px;
-}
 #toppingsList{
   margin-left: auto;
   margin-right: auto;
   width: 350px;
+}
+
+@media all and (max-width:700px) {
+  #prebuiltHolder {
+    flex-direction: column;
+  }
 }

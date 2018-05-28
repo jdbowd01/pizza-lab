@@ -7,6 +7,7 @@ customizePizza.addEventListener("click", customizeTab);
 function prebuiltTab(evt) {
   document.getElementById("tabTitle").children[0].innerHTML = "Prebuilt Pizzas";
   document.getElementById("prebuiltHolder").style.display = "flex";
+  document.getElementById("customHolder").style.display = "none";  
   document.getElementById("orderBtn").style.display = "none";
   document.getElementById("checkoutBtn").style.marginLeft = "auto";
   document.getElementsByClassName("pizzaTab")[1].children.style.display = "none";
