@@ -40,7 +40,7 @@
 #orderingArea {
   display: flex;
   flex-direction: row;
-  height: 490px;
+  height: 540px;
   width: 96%;
   margin: 2% 2%;
   background-color: #999;
@@ -128,4 +128,56 @@
   margin: auto 0%;
   margin-left: auto;
   height: fit-content;
+}
+.box{
+  display: flex;
+  border: 1px solid #000;
+}
+#customHolder{
+  flex-direction: row;
+  width: 100%;
+  height: 100%;;
+}
+#pizzaDisplay{
+  width: 583px;
+  flex: 1;
+  flex-direction: column;
+  text-align: center;
+}
+#toppingsDisplay{
+  width: 583px;
+  flex: 1;
+}
+#pizzaDrawing{
+  width: 250px;
+  height: 250px;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+}
+#lblBonus{
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+#lblToppings{
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+#toppingsDisplay{
+  flex-direction: column;
+  text-align: center;
+}
+.toppingsRow{
+  display: flex;
+  flex-direction: row;
+  text-align: left;
+  margin-left: 45px;
+}
+.topping{
+  width: 175px;
+}
+#toppingsList{
+  margin-left: auto;
+  margin-right: auto;
+  width: 350px;
 }
