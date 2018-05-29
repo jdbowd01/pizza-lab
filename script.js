@@ -19,6 +19,9 @@ for (var i = 0; i < buttons.length; i++) {
 for (var i = 0; i < 10; i++) {
   document.getElementById("tpg" + i).addEventListener("change", addToPizza);
 }
+for (var i = 0; i < 4; i++) {
+  document.getElementsByClassName("pizzaSetting")[i].children[1].addEventListener("change", changePizza);
+}
 
 function prebuiltTab(evt) {
   document.getElementById("tabTitle").children[0].innerHTML = "Prebuilt Pizzas";
@@ -26,8 +29,7 @@ function prebuiltTab(evt) {
   document.getElementById("customHolder").style.display = "none";
   document.getElementById("orderBtn").style.display = "none";
   document.getElementById("checkoutBtn").style.marginLeft = "auto";
-  document.getElementsByClassName("pizzaTab")[1].children.style.display = "none";
-  document.getElementsByClassName("pizzaTab")[1].children[0].style.display = "flex";
+  document.getElementById("pizzaSettings").style.display = "none";  
 }
 
 function customizeTab(evt) {
@@ -37,7 +39,7 @@ function customizeTab(evt) {
   document.getElementById("orderBtn").style.display = "flex";
   document.getElementById("orderBtn").style.marginLeft = "auto";
   document.getElementById("checkoutBtn").style.marginLeft = "2%";
-  document.getElementsByClassName("pizzaTab")[1].children[0].style.display = "flex";
+  document.getElementById("pizzaSettings").style.display = "flex";  
   FillPizza();
 }
 
@@ -75,6 +77,13 @@ function addToPizza(evt) {
   }
   setPrice();
   drawPizza();
+}
+
+function changePizza(evt) {
+  // document.getElementById("sizeSetting").children[1].value
+  // document.getElementById("crustSetting").children[1].value
+  // document.getElementById("sauceSetting").children[1].value
+  // document.getElementById("cheeseSetting").children[1].value
 }
 
 function setPrice() {
