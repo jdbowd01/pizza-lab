@@ -206,9 +206,11 @@
   flex: 1;
 }
 #pizzaDrawing {
-  position: relative;
   margin-left: auto;
   margin-right: auto;
+  position: relative;
+  width: 250px;
+  height: 250px;
 }
 #lblBonus{
   visibility: hidden;
@@ -247,8 +249,10 @@
     border-left: 0px solid #555;    
     border-top: 1px solid #555;    
   }
-  #pizzaDisplay{
-    width: 100%;
+  #pizzaDrawing{
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
   }
   #modDisplay{
     display: flex;
