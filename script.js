@@ -24,6 +24,7 @@ for (var i = 0; i < 4; i++) {
 }
 
 function prebuiltTab(evt) {
+  document.getElementById("endOrder").children[0].innerHTML = "Total: $0.00";
   document.getElementById("tabTitle").children[0].innerHTML = "Prebuilt Pizzas";
   document.getElementById("prebuiltHolder").style.display = "flex";
   document.getElementById("customHolder").style.display = "none";
@@ -60,7 +61,24 @@ function FillPizza() {
 }
 
 function addToOrder(evt) {
-
+  //reset everything
+  if(evt.path[1].id == "prebuiltPizza1") {
+    document.getElementById("endOrder").children[0].innerHTML = "Total: $5.00";
+  }
+  else if(evt.path[1].id == "prebuiltPizza2") {
+    document.getElementById("endOrder").children[0].innerHTML = "Total: $9.00";
+  }
+  else if(evt.path[1].id == "prebuiltPizza3") {
+    document.getElementById("endOrder").children[0].innerHTML = "Total: $6.50";
+  }
+  else if(evt.path[1].id == "prebuiltPizza4") {
+    document.getElementById("endOrder").children[0].innerHTML = "Total: $6.00";
+  }
+  else if(evt.path[1].id == "prebuiltPizza5") {
+    document.getElementById("endOrder").children[0].innerHTML = "Total: $5.00";
+  }
+  alert("Thanks for your purchase! That will be " + document.getElementById("endOrder").children[0].innerHTML.substr(7) + "!");
+  prebuiltTab(null);
 }
 
 function goToCheckout(evt) {
