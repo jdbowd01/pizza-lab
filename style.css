@@ -9,19 +9,40 @@
 }
 .pizzaTab {
   display: flex;
+  flex-direction: column;
   flex: 1;
   border-top: 1px solid #555;
   border-right: 1px solid #555;
-}
-.pizzaTab p {
-  margin: auto;
+  background: linear-gradient(#4b5, #4d5);
+  border-bottom-left-radius: 20px;  
 }
 .pizzaTab:first-child {
   border-top: 0px solid #555;
+  border-bottom-left-radius: 0px;    
+  border-top-left-radius: 20px;
+}
+.pizzaTab .mainTab {
+  margin: auto;
+}
+.pizzaSetting {
+  display: flex;
+  flex-direction: row;
+  margin: 0% 5px;
+}
+.pizzaSetting select {
+  height: 60%;
+  margin: auto 0%;
+  margin-left: auto; 
+  background-color: #999;
+  border: #999;
+}
+.pizzaSetting select:focus { 
+  outline: none;
 }
 .prebuiltPizza {
-  margin: 4% auto;
+  margin: 2% auto;
   text-align: center;
+  width: 13vw;
 }
 .prebuiltPizzaPicture {
   width: 10vw;
@@ -29,7 +50,6 @@
   min-width: 100px;
   min-height: 100px;
   margin: 0% auto;
-  object-fit: contain;
 }
 .toppingsRow{
   display: flex;
@@ -59,6 +79,10 @@
   margin: -8px;
   margin-bottom: 0px;
   padding: 5px;
+}
+#pizzaSettings {
+  display: none;
+  flex-direction: column;
 }
 #orderingArea {
   display: flex;
@@ -90,23 +114,31 @@
   flex-direction: row;
   border-bottom: 1px solid #555;  
 }
-#prebuiltPizza1 .prebuiltPizzaPicture {
+#prebuiltPizza1 img {
   background: url(images/toppings/sausage-normal.png),
   url(images/toppings/pepperoni-normal.png),
   url(images/toppings/ham-normal.png),
-  url(images/cheeses/normal.png),
+  url(images/cheeses/normal.png), 
   url(images/sauces/normal.png),
-  url(images/crusts/regular.png),
-  #fff;
+  url(images/crusts/regular.png);
+  background-size: 8vw, 8vw, 8vw, 9vw, 9vw, 10vw;
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+  background-position: center, center, center, center, center, center;
 }
 #prebuiltPizza2 img {
+  width: 10vw;
+  height: 10vw;
+  min-width: 100px;
+  min-height: 100px;
   background: url(images/toppings/spinach-double.png),
   url(images/toppings/peppers-double.png),
   url(images/toppings/onions-double.png),
   url(images/cheeses/double.png),
   url(images/sauces/light.png),
-  url(images/crusts/garlic.png),
-  #fff;
+  url(images/crusts/garlic.png);
+  background-size: 8vw, 8vw, 8vw, 9vw, 9vw, 10vw;
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+  background-position: center, center, center, center, center, center;
 }
 #prebuiltPizza3 img {
   background: url(images/toppings/jalapeno-light.png),
@@ -114,8 +146,10 @@
   url(images/toppings/chicken-normal.png),
   url(images/cheeses/double.png),
   url(images/sauces/normal.png),
-  url(images/crusts/stuffed.png),
-  #fff;
+  url(images/crusts/stuffed.png);
+  background-size: 8vw, 8vw, 8vw, 9vw, 9vw, 10vw, 10vw;
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+  background-position: center, center, center, center, center, center;
 }
 #prebuiltPizza4 img {
   background: url(images/toppings/sausage-normal.png),
@@ -124,8 +158,10 @@
   url(images/toppings/onions-normal.png),
   url(images/cheeses/normal.png),
   url(images/sauces/normal.png),
-  url(images/crusts/regular.png),
-  #fff;
+  url(images/crusts/regular.png);
+  background-size: 8vw, 8vw, 8vw, 9vw, 9vw, 9vw, 10vw;
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+  background-position: center, center, center, center, center, center, center;
 }
 #prebuiltPizza5 img {
   background: url(images/toppings/peppers-normal.png),
@@ -133,8 +169,10 @@
   url(images/toppings/anchovies-normal.png),
   url(images/cheeses/double.png),
   url(images/sauces/light.png),
-  url(images/crusts/thin.png),
-  #fff;
+  url(images/crusts/thin.png);
+  background-size: 8vw, 8vw, 8vw, 9vw, 10vw, 10vw;
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+  background-position: center, center, center, center, center, center;
 }
 #endOrder {
   display: flex;

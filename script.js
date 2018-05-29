@@ -19,15 +19,18 @@ for (var i = 0; i < buttons.length; i++) {
 for (var i = 0; i < 10; i++) {
   document.getElementById("tpg" + i).addEventListener("change", addToPizza);
 }
+for (var i = 0; i < 4; i++) {
+  document.getElementsByClassName("pizzaSetting")[i].children[1].addEventListener("change", changePizza);
+}
 
 function prebuiltTab(evt) {
+  document.getElementById("endOrder").children[0].innerHTML = "Total: $0.00";
   document.getElementById("tabTitle").children[0].innerHTML = "Prebuilt Pizzas";
   document.getElementById("prebuiltHolder").style.display = "flex";
   document.getElementById("customHolder").style.display = "none";
   document.getElementById("orderBtn").style.display = "none";
   document.getElementById("checkoutBtn").style.marginLeft = "auto";
-  document.getElementsByClassName("pizzaTab")[1].children.style.display = "none";
-  document.getElementsByClassName("pizzaTab")[1].children[0].style.display = "flex";
+  document.getElementById("pizzaSettings").style.display = "none";  
 }
 
 function customizeTab(evt) {
@@ -37,7 +40,7 @@ function customizeTab(evt) {
   document.getElementById("orderBtn").style.display = "flex";
   document.getElementById("orderBtn").style.marginLeft = "auto";
   document.getElementById("checkoutBtn").style.marginLeft = "2%";
-  document.getElementsByClassName("pizzaTab")[1].children[0].style.display = "flex";
+  document.getElementById("pizzaSettings").style.display = "flex";  
   FillPizza();
 }
 
@@ -58,7 +61,24 @@ function FillPizza() {
 }
 
 function addToOrder(evt) {
-
+  //reset everything
+  if(evt.path[1].id == "prebuiltPizza1") {
+    document.getElementById("endOrder").children[0].innerHTML = "Total: $5.00";
+  }
+  else if(evt.path[1].id == "prebuiltPizza2") {
+    document.getElementById("endOrder").children[0].innerHTML = "Total: $9.00";
+  }
+  else if(evt.path[1].id == "prebuiltPizza3") {
+    document.getElementById("endOrder").children[0].innerHTML = "Total: $6.50";
+  }
+  else if(evt.path[1].id == "prebuiltPizza4") {
+    document.getElementById("endOrder").children[0].innerHTML = "Total: $6.00";
+  }
+  else if(evt.path[1].id == "prebuiltPizza5") {
+    document.getElementById("endOrder").children[0].innerHTML = "Total: $5.00";
+  }
+  alert("Thanks for your purchase! That will be " + document.getElementById("endOrder").children[0].innerHTML.substr(7) + "!");
+  prebuiltTab(null);
 }
 
 function goToCheckout(evt) {
@@ -75,6 +95,13 @@ function addToPizza(evt) {
   }
   setPrice();
   drawPizza();
+}
+
+function changePizza(evt) {
+  // document.getElementById("sizeSetting").children[1].value
+  // document.getElementById("crustSetting").children[1].value
+  // document.getElementById("sauceSetting").children[1].value
+  // document.getElementById("cheeseSetting").children[1].value
 }
 
 function setPrice() {
