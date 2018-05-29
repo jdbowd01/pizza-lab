@@ -47,14 +47,14 @@ function customizeTab(evt) {
 function FillPizza() {
   var pizza = document.getElementById('pizzaDrawing');
   var crust = new Image(250, 250);
-  crust.src = 'images/crusts/regular.png';
+  crust.src = 'images/crusts/regular-01.png';
   crust.style = "z-index:2; position:absolute; top:0px; left:0px;";
-  var sauce = new Image(225, 225);
-  sauce.src = 'images/sauces/normal.png';
-  sauce.style = "z-index:3; position:absolute; top:12.5px; left:12.5px;";
-  var cheese = new Image(225, 225);
-  cheese.src = 'images/cheeses/normal.png';
-  cheese.style = "z-index:4; position:absolute; top:12.5px; left:12.5px;";
+  var sauce = new Image(250, 250);
+  sauce.src = 'images/sauces/normal-01.png';
+  sauce.style = "z-index:3; position:absolute;top:0px; left:0px;";
+  var cheese = new Image(250, 250);
+  cheese.src = 'images/cheeses/normal-01.png';
+  cheese.style = "z-index:4; position:absolute;top:0px; left:0px;";
   pizza.appendChild(crust);
   pizza.appendChild(sauce);
   pizza.appendChild(cheese);
@@ -129,60 +129,60 @@ function drawPizza() {
   var counter = 0;
   for (i = 0; i < currentToppings.length; i++) {
     if (currentToppings[i] != "") {
-      var img = new Image(200, 200);
+      var img = new Image(250, 250);
       switch (i) {
         case 0:
-          img.src = "images/toppings/pepperoni-normal.png";
+          img.src = "images/toppings/pepperoni-normal-01.png";
           img.id = "Pepperoni";
           counter++;
           break;
         case 1:
-          img.src = "images/toppings/sausage-normal.png";
+          img.src = "images/toppings/sausage-normal-01.png";
           img.id = "Sausage";
           counter++;
           break;
         case 2:
-          img.src = "images/toppings/bacon-normal.png";
+          img.src = "images/toppings/bacon-normal-01.png";
           img.id = "Bacon";
           counter++;
           break;
         case 3:
-          img.src = "images/toppings/chicken-normal.png";
+          img.src = "images/toppings/chicken-normal-01.png";
           img.id = "Chicken";
           counter++;
           break;
         case 4:
-          img.src = "images/toppings/ham-normal.png";
+          img.src = "images/toppings/ham-normal-01.png";
           img.id = "Ham";
           counter++;
           break;
         case 5:
-          img.src = "images/toppings/anchovies-normal.png";
+          img.src = "images/toppings/anchovies-normal-01.png";
           img.id = "Anchovies";
           counter++;
           break;
         case 6:
-          img.src = "images/toppings/onions-normal.png";
+          img.src = "images/toppings/onions-normal-01.png";
           img.id = "Onions";
           counter++;
           break;
         case 7:
-          img.src = "images/toppings/spinach-normal.png";
+          img.src = "images/toppings/spinach-normal-01.png";
           img.id = "Spinach";
           counter++;
           break;
         case 8:
-          img.src = "images/toppings/peppers-normal.png";
+          img.src = "images/toppings/peppers-normal-01.png";
           img.id = "Peppers";
           counter++;
           break;
         case 9:
-          img.src = "images/toppings/jalapeno-normal.png";
+          img.src = "images/toppings/jalapeno-normal-01.png";
           img.id = "Jalapenos";
           counter++;
           break;
       }
-      img.style = "z-index:5; position:absolute; top:25px; left:25px;";
+      img.style = "z-index:5; position:absolute; top:0px; left:0px;";
       pizza.appendChild(img);
     }
     
@@ -204,6 +204,10 @@ function drawPizza() {
 }
 
 function updateToppingList(){
+  var list = document.getElementById('yourToppingsList');
+  while (list.hasChildNodes()) { 
+    list.removeChild(list.lastChild);
+  }
   var options = ["Regular", "Light", "Double"];
   for(var i = 0; i< currentToppings.length; i++){
     if(currentToppings[i] != ""){
