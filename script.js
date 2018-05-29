@@ -120,7 +120,6 @@ function setPrice() {
 }
 
 function drawPizza() {
-  console.log(currentToppings);
   var pizza = document.getElementById('pizzaDrawing');
   while (pizza.hasChildNodes()) { 
     pizza.removeChild(pizza.lastChild);
