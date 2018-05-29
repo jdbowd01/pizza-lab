@@ -185,9 +185,36 @@
   margin-right: auto;
   width: 350px;
 }
-
+#modDisplay{
+  display: none;
+  text-align: center;
+}
+.modRow{
+  display: flex;
+  flex-direction: row;
+  margin-left: auto;
+  margin-right: auto;
+}
+.mod{
+  margin: 5px;
+}
 @media all and (max-width:700px) {
   #prebuiltHolder {
+    flex-direction: column;
+  }
+  /* Customize stuff */
+  #customDisplay{
+    flex-direction: column;
+    width: 100%;
+  }
+  #toppingsDisplay{
+    width: 100%;
+  }
+  #pizzaDisplay{
+    width: 100%;
+  }
+  #modDisplay{
+    display: flex;
     flex-direction: column;
   }
 }

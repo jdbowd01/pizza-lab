@@ -1,124 +1,173 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Pizza and Stuff</title>
-    <link href="style.css" rel="stylesheet" />
-  </head>
-  <body>
-    <h1 id="titleBar">Build your Pizza</h1>
-    <div id="orderingArea">
-      <div id="orderingTabs">
-        <div class="pizzaTab"><p class="mainTab">Prebuilt Pizzas</p></div>
-        <div class="pizzaTab"><p class="mainTab">Customize</p></div>
+
+<head>
+  <title>Pizza and Stuff</title>
+  <link href="style.css" rel="stylesheet" />
+</head>
+
+<body>
+  <h1 id="titleBar">Build your Pizza</h1>
+  <div id="orderingArea">
+    <div id="orderingTabs">
+      <div class="pizzaTab">
+        <p class="mainTab">Prebuilt Pizzas</p>
       </div>
-      <div id="orderDesc">
-        <h3 id="tabTitle"><p>Prebuilt Pizzas</p></h3>
-        <div id="prebuiltHolder">
-          <div id="prebuiltPizza1" class="prebuiltPizza">
-            <img class="prebuiltPizzaPicture" />
-            <p class="bold">Pizza 1</p>
-            <div class="btn">Add to Order</div>
-            <p class="prebuiltPizzaDesc">...</p>
-          </div>
-          <div id="prebuiltPizza2" class="prebuiltPizza">
-            <img class="prebuiltPizzaPicture" />
-            <p class="bold">Pizza 2</p>
-            <div class="btn">Add to Order</div>
-            <p class="prebuiltPizzaDesc">...</p>
-          </div>
-          <div id="prebuiltPizza3" class="prebuiltPizza">
-            <img class="prebuiltPizzaPicture" />
-            <p class="bold">Pizza 3</p>
-            <div class="btn">Add to Order</div>
-            <p class="prebuiltPizzaDesc">...</p>
-          </div>
-          <div id="prebuiltPizza4" class="prebuiltPizza">
-            <img class="prebuiltPizzaPicture" />
-            <p class="bold">Pizza 4</p>
-            <div class="btn">Add to Order</div>
-            <p class="prebuiltPizzaDesc">...</p>
-          </div>
-          <div id="prebuiltPizza5" class="prebuiltPizza">
-            <img class="prebuiltPizzaPicture" />
-            <p class="bold">Pizza 5</p>
-            <div class="btn">Add to Order</div>
-            <p class="prebuiltPizzaDesc">...</p>
-          </div>
-        </div>
-        <div id="customHolder">
-          <div id="customDisplay" class="box">
-            <div id="pizzaDisplay" class="box">
-              <label id='lblBonus'>5 Toppings Deal!</label>
-              <div id='pizzaDrawing'>
-              </div>
-              <div id="yourToppings">
-                <label id="lblToppings">Your Toppings</label>
-              </div>
-            </div>
-            <div id="toppingsDisplay" class="box">
-              <label>Toppings</label>
-              <div id="toppingsList">
-                <div class='toppingsRow'>
-                  <div class='topping'>
-                    <input type="checkbox" id='tpg0' value="Pepperoni">
-                    <label>Pepperoni</label>
-                  </div>
-                  <div class='topping'>
-                    <input type="checkbox" id='tpg1' value="Sausage">
-                    <label>Sausage</label>
-                  </div>
-                </div>
-                <div class='toppingsRow'>
-                  <div class='topping'>
-                    <input type="checkbox" id='tpg2' value="Bacon">
-                    <label>Bacon</label>
-                  </div>
-                  <div class='topping'>
-                    <input type="checkbox" id='tpg3' value="Chicken">
-                    <label>Chicken</label>
-                  </div>
-                </div>
-                <div class='toppingsRow'>
-                  <div class='topping'>
-                    <input type="checkbox" id='tpg4' value="Ham">
-                    <label>Ham</label>
-                  </div>
-                  <div class='topping'>
-                    <input type="checkbox" id='tpg5' value="Anchovies">
-                    <label>Anchovies</label>
-                  </div>
-                </div>
-                <div class='toppingsRow'>
-                  <div class='topping'>
-                    <input type="checkbox" id='tpg6' value="Onions">
-                    <label>Onions</label>
-                  </div>
-                  <div class='topping'>
-                    <input type="checkbox" id='tpg7' value="Spinach">
-                    <label>Spinach</label>
-                  </div>
-                </div>
-                <div class='toppingsRow'>
-                  <div class='topping'>
-                    <input type="checkbox" id='tpg8' value="Green Peppers">
-                    <label>Green Peppers</label>
-                  </div>
-                  <div class='topping'>
-                    <input type="checkbox" id='tpg9' value="Jalapeno Peppers">
-                    <label>Jalapeno Peppers</label>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div id="endOrder">
-          <p class="bold">Total: $0.00</p>
-          <div id="orderBtn" class="btn">Add to Order</div>
-          <div id="checkoutBtn" class="btn">Checkout</div>
-        </div>
+      <div class="pizzaTab">
+        <p class="mainTab">Customize</p>
       </div>
     </div>
-    <script src="script.js"></script>
-  </body>
+    <div id="orderDesc">
+      <h3 id="tabTitle">
+        <p>Prebuilt Pizzas</p>
+      </h3>
+      <div id="prebuiltHolder">
+        <div id="prebuiltPizza1" class="prebuiltPizza">
+          <img class="prebuiltPizzaPicture" />
+          <p class="bold">Pizza 1</p>
+          <div class="btn">Add to Order</div>
+          <p class="prebuiltPizzaDesc">...</p>
+        </div>
+        <div id="prebuiltPizza2" class="prebuiltPizza">
+          <img class="prebuiltPizzaPicture" />
+          <p class="bold">Pizza 2</p>
+          <div class="btn">Add to Order</div>
+          <p class="prebuiltPizzaDesc">...</p>
+        </div>
+        <div id="prebuiltPizza3" class="prebuiltPizza">
+          <img class="prebuiltPizzaPicture" />
+          <p class="bold">Pizza 3</p>
+          <div class="btn">Add to Order</div>
+          <p class="prebuiltPizzaDesc">...</p>
+        </div>
+        <div id="prebuiltPizza4" class="prebuiltPizza">
+          <img class="prebuiltPizzaPicture" />
+          <p class="bold">Pizza 4</p>
+          <div class="btn">Add to Order</div>
+          <p class="prebuiltPizzaDesc">...</p>
+        </div>
+        <div id="prebuiltPizza5" class="prebuiltPizza">
+          <img class="prebuiltPizzaPicture" />
+          <p class="bold">Pizza 5</p>
+          <div class="btn">Add to Order</div>
+          <p class="prebuiltPizzaDesc">...</p>
+        </div>
+      </div>
+      <div id="customHolder">
+        <div id="customDisplay" class="box">
+          <div id="modDisplay">
+            <div class='modRow'>
+              <div class='mod'>
+                <label>Size: </label>
+                <select type="select">
+                  <option>Small</option>
+                  <option>Medium</option>
+                  <option>Large</option>
+                  <option>Extra Large</option>
+                </select>
+              </div>
+              <div class='mod'>
+                <label>Crust: </label>
+                <select type="select">
+                  <option>Regular</option>
+                  <option>Thin</option>
+                  <option>Stuffed</option>
+                  <option>Garlic Butter</option>
+                </select>
+              </div>
+            </div>
+            <div class='modRow'>
+              <div class='mod'>
+                <label>Sauce: </label>
+                <select type="select">
+                  <option>Normal</option>
+                  <option>Light</option>
+                  <option>Double</option>
+                </select>
+              </div>
+              <div class='mod'>
+                <label>Cheese: </label>
+                <select type="select">
+                  <option>Normal</option>
+                  <option>Light</option>
+                  <option>Double</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div id="pizzaDisplay" class="box">
+            <label id='lblBonus'>5 Toppings Deal!</label>
+            <div id='pizzaDrawing'>
+            </div>
+            <div id="yourToppings">
+              <label id="lblToppings">Your Toppings</label>
+            </div>
+          </div>
+          <div id="toppingsDisplay" class="box">
+            <label>Toppings</label>
+            <div id="toppingsList">
+              <div class='toppingsRow'>
+                <div class='topping'>
+                  <input type="checkbox" id='tpg0' value="Pepperoni">
+                  <label>Pepperoni</label>
+                </div>
+                <div class='topping'>
+                  <input type="checkbox" id='tpg1' value="Sausage">
+                  <label>Sausage</label>
+                </div>
+              </div>
+              <div class='toppingsRow'>
+                <div class='topping'>
+                  <input type="checkbox" id='tpg2' value="Bacon">
+                  <label>Bacon</label>
+                </div>
+                <div class='topping'>
+                  <input type="checkbox" id='tpg3' value="Chicken">
+                  <label>Chicken</label>
+                </div>
+              </div>
+              <div class='toppingsRow'>
+                <div class='topping'>
+                  <input type="checkbox" id='tpg4' value="Ham">
+                  <label>Ham</label>
+                </div>
+                <div class='topping'>
+                  <input type="checkbox" id='tpg5' value="Anchovies">
+                  <label>Anchovies</label>
+                </div>
+              </div>
+              <div class='toppingsRow'>
+                <div class='topping'>
+                  <input type="checkbox" id='tpg6' value="Onions">
+                  <label>Onions</label>
+                </div>
+                <div class='topping'>
+                  <input type="checkbox" id='tpg7' value="Spinach">
+                  <label>Spinach</label>
+                </div>
+              </div>
+              <div class='toppingsRow'>
+                <div class='topping'>
+                  <input type="checkbox" id='tpg8' value="Green Peppers">
+                  <label>Green Peppers</label>
+                </div>
+                <div class='topping'>
+                  <input type="checkbox" id='tpg9' value="Jalapeno Peppers">
+                  <label>Jalapeno Peppers</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="endOrder">
+        <p class="bold">Total: $0.00</p>
+        <div id="orderBtn" class="btn">Add to Order</div>
+        <div id="checkoutBtn" class="btn">Checkout</div>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+
 </html>
