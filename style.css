@@ -35,14 +35,22 @@
   display: flex;
   flex-direction: row;
   text-align: left;
-  margin-left: 45px;
+  margin: 3vw auto;
 }
 .topping{
-  width: 175px;
+  width: 150px;
 }
 .box{
   display: flex;
-  border: 1px solid #000;
+}
+.modRow{
+  display: flex;
+  flex-direction: row;
+  margin-left: auto;
+  margin-right: auto;
+}
+.mod{
+  margin: 5px;
 }
 
 #titleBar {
@@ -70,6 +78,7 @@
   display: flex;
   flex-direction: column;
   flex: 6;
+  width: 90%;
 }
 #tabTitle {
   text-align: center;
@@ -79,6 +88,7 @@
 #prebuiltHolder {
   display: flex;
   flex-direction: row;
+  border-bottom: 1px solid #555;  
 }
 #prebuiltPizza1 img {
   background: url(images/toppings/sausage-normal.png),
@@ -147,21 +157,17 @@
   display: none;
   flex-direction: row;
   width: 100%;
-  height: 100%;
+  border-bottom: 1px solid #555;  
 }
 #pizzaDisplay{
-  width: 583px;
   flex: 1;
   flex-direction: column;
   text-align: center;
 }
 #toppingsDisplay{
-  width: 583px;
   flex: 1;
 }
-#pizzaDrawing{
-  width: 250px;
-  height: 250px;
+#pizzaDrawing {
   position: relative;
   margin-left: auto;
   margin-right: auto;
@@ -179,6 +185,7 @@
 #toppingsDisplay{
   flex-direction: column;
   text-align: center;
+  border-left: 1px solid #555;
 }
 #toppingsList{
   margin-left: auto;
@@ -189,26 +196,19 @@
   display: none;
   text-align: center;
 }
-.modRow{
-  display: flex;
-  flex-direction: row;
-  margin-left: auto;
-  margin-right: auto;
-}
-.mod{
-  margin: 5px;
-}
 @media all and (max-width:700px) {
   #prebuiltHolder {
     flex-direction: column;
   }
   /* Customize stuff */
-  #customDisplay{
+  #customHolder{
     flex-direction: column;
     width: 100%;
   }
   #toppingsDisplay{
     width: 100%;
+    border-left: 0px solid #555;    
+    border-top: 1px solid #555;    
   }
   #pizzaDisplay{
     width: 100%;
