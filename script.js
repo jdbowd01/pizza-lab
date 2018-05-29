@@ -71,7 +71,7 @@ function addToPizza(evt) {
     currentToppings[num] = "";
   }
   else {
-    currentToppings[num] = "top";
+    currentToppings[num] = evt.target.value;
   }
   setPrice();
   drawPizza();
@@ -164,6 +164,41 @@ function drawPizza() {
     }
     else{
       document.getElementById('lblBonus').style = "visibility:hidden";
+    }
+    if (counter > 0){
+      document.getElementById('lblToppings').style = "visibility:visible";
+    }
+    else{
+      document.getElementById('lblToppings').style = "visibility:hidden";
+    }
+    
+  }
+  updateToppingList();
+}
+
+function updateToppingList(){
+  var options = ["Regular", "Light", "Double"];
+  for(var i = 0; i< currentToppings.length; i++){
+    if(currentToppings[i] != ""){
+      var d = document.createElement("div");
+      var l = document.createElement('label');
+      var s = document.createElement('select');
+      s.setAttribute("options", options);
+      var full = document.createElement('button');
+      var left = document.createElement('button');
+      var right = document.createElement('button');
+      d.className = 'toppingListElement';
+      l.innerHTML = (currentToppings[i]);
+      full.className = 'btnFullPizza';
+      //setAttribute
+      left.className = 'btnLeftPizza';
+      right.className = 'btnRightPizza';
+      d.appendChild(l);
+      d.appendChild(s);
+      d.appendChild(full);
+      d.appendChild(left);
+      d.appendChild(right);
+      document.getElementById('yourToppingsList').appendChild(d);
     }
   }
 }
