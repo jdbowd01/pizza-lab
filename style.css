@@ -90,7 +90,7 @@
   flex-direction: row;
   border-bottom: 1px solid #555;  
 }
-#prebuiltPizza1 img {
+#prebuiltPizza1 .prebuiltPizzaPicture {
   background: url(images/toppings/sausage-normal.png),
   url(images/toppings/pepperoni-normal.png),
   url(images/toppings/ham-normal.png),

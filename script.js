@@ -73,7 +73,23 @@ function addToPizza(evt) {
   else {
     currentToppings[num] = "top";
   }
+  setPrice();
   drawPizza();
+}
+
+function setPrice() {
+  var toppings = 0;
+  for(var i = 0; i < 10; i++) {
+    if(currentToppings[i] != "") {
+      toppings += 1;
+    }
+  }
+  if(toppings > 1 && toppings < 5) {
+    document.getElementById("endOrder").children[0].innerHTML = "Total: $" + (toppings - 1) + ".00";
+  }
+  else if(toppings > 5) {
+    document.getElementById("endOrder").children[0].innerHTML = "Total: $" + (toppings - 2) + ".00";    
+  }
 }
 
 function drawPizza() {
