@@ -239,8 +239,11 @@ function drawPizza() {
   }
   updateToppingList();
 }
-
+var selectors;
+var values;
 function updateToppingList(){
+  selectors = [];
+  values = [];
   var list = document.getElementById('yourToppingsList');
   while (list.hasChildNodes()) { 
     list.removeChild(list.lastChild);
@@ -258,6 +261,9 @@ function updateToppingList(){
         el.value = opt;
         s.appendChild(el);
       }
+      selectors[selectors.length] = s;
+      values[values.length] = s.value;
+      s.addEventListener('change', modToppings);
       var full = document.createElement('button');
       var left = document.createElement('button');
       var right = document.createElement('button');
@@ -266,6 +272,13 @@ function updateToppingList(){
       full.className = 'btnFullPizza';
       left.className = 'btnLeftPizza';
       right.className = 'btnRightPizza';
+      full.id = l.innerHTML + 'full';
+      left.id = l.innerHTML + 'left';
+      right.id = l.innerHTML + 'right';
+      full.style = 'background: #1286AA;';
+      full.addEventListener('click', halves);
+      left.addEventListener('click', halves);
+      right.addEventListener('click', halves);
       d.appendChild(l);
       d.appendChild(s);
       d.appendChild(full);
@@ -275,4 +288,199 @@ function updateToppingList(){
     }
   }
   setPrice();
+}
+function modToppings(evt){
+  values[values.length] = evt.target.value;
+}
+function halves(evt){
+  var b = evt.target;
+  if(b.id == "Pepperonifull"){
+    document.getElementById("Pepperoni").src = 'images/toppings/pepperoni-normal-01.png';
+    b.style = "background:#1286AA;";
+    document.getElementById('Pepperonileft').style = "background:#FFF;";
+    document.getElementById('Pepperoniright').style = "background:#FFF;";
+  }
+  else if(b.id == "Pepperonileft"){
+    document.getElementById("Pepperoni").src = 'images/toppings/pepperoni-left-01.png';
+    b.style = "background:#1286AA;";
+    document.getElementById('Pepperonifull').style = "background:#FFF;";
+    document.getElementById('Pepperoniright').style = "background:#FFF;";
+  }
+  else if(b.id == "Pepperoniright"){
+    document.getElementById("Pepperoni").src = 'images/toppings/pepperoni-right-01.png';
+    b.style = "background:#1286AA;";
+    document.getElementById('Pepperonileft').style = "background:#FFF;";
+    document.getElementById('Pepperonifull').style = "background:#FFF;";
+  }
+  //////////////////////////
+  else if(b.id == "Sausagefull"){
+    document.getElementById("Sausage").src = 'images/toppings/sausage-normal-01.png';
+    b.style = "background:#1286AA;";
+    document.getElementById('Sausageleft').style = "background:#FFF;";
+    document.getElementById('Sausageright').style = "background:#FFF;";
+  }
+  else if(b.id == "Sausageleft"){
+    document.getElementById("Sausage").src = 'images/toppings/sausage-left-01.png';
+    b.style = "background:#1286AA;";
+    document.getElementById('Sausagefull').style = "background:#FFF;";
+    document.getElementById('Sausageright').style = "background:#FFF;";
+  }
+  else if(b.id == "Sausageright"){
+    document.getElementById("Sausage").src = 'images/toppings/sausage-right-01.png';
+    b.style = "background:#1286AA;";
+    document.getElementById('Sausageleft').style = "background:#FFF;";
+    document.getElementById('Sausagefull').style = "background:#FFF;";
+  }
+  ///////////////////////////
+  else if(b.id == "Baconfull"){
+    document.getElementById("Bacon").src = 'images/toppings/bacon-normal-01.png';
+    b.style = "background:#1286AA;";
+    document.getElementById('Baconleft').style = "background:#FFF;";
+    document.getElementById('Baconright').style = "background:#FFF;";
+  }
+  else if(b.id == "Baconleft"){
+    document.getElementById("Bacon").src = 'images/toppings/bacon-left-01.png';
+    b.style = "background:#1286AA;";
+    document.getElementById('Baconfull').style = "background:#FFF;";
+    document.getElementById('Baconright').style = "background:#FFF;";
+  }
+  else if(b.id == "Baconright"){
+    document.getElementById("Bacon").src = 'images/toppings/bacon-right-01.png';
+    b.style = "background:#1286AA;";
+    document.getElementById('Baconleft').style = "background:#FFF;";
+    document.getElementById('Baconfull').style = "background:#FFF;";
+  }
+  ///////////////////////////
+  else if(b.id == "Chickenfull"){
+    document.getElementById("Chicken").src = 'images/toppings/chicken-normal-01.png';
+    b.style = "background:#1286AA;";
+    document.getElementById('Chickenleft').style = "background:#FFF;";
+    document.getElementById('Chickenright').style = "background:#FFF;";
+  }
+  else if(b.id == "Chickenleft"){
+    document.getElementById("Chicken").src = 'images/toppings/chicken-left-01.png';
+    b.style = "background:#1286AA;";
+    document.getElementById('Chickenfull').style = "background:#FFF;";
+    document.getElementById('Chickenright').style = "background:#FFF;";
+  }
+  else if(b.id == "Chickenright"){
+    document.getElementById("Chicken").src = 'images/toppings/chicken-right-01.png';
+    b.style = "background:#1286AA;";
+    document.getElementById('Chickenleft').style = "background:#FFF;";
+    document.getElementById('Chickenfull').style = "background:#FFF;";
+  }
+  ///////////////////////////
+  else if(b.id == "Hamfull"){
+    document.getElementById("Ham").src = 'images/toppings/ham-normal-01.png';
+    b.style = "background:#1286AA;";
+    document.getElementById('Hamleft').style = "background:#FFF;";
+    document.getElementById('Hamright').style = "background:#FFF;";
+  }
+  else if(b.id == "Hamleft"){
+    document.getElementById("Ham").src = 'images/toppings/ham-left-01.png';
+    b.style = "background:#1286AA;";
+    document.getElementById('Hamfull').style = "background:#FFF;";
+    document.getElementById('Hamright').style = "background:#FFF;";
+  }
+  else if(b.id == "Hamright"){
+    document.getElementById("Ham").src = 'images/toppings/ham-right-01.png';
+    b.style = "background:#1286AA;";
+    document.getElementById('Hamleft').style = "background:#FFF;";
+    document.getElementById('Hamfull').style = "background:#FFF;";
+  }
+  ////////////////////////
+  else if(b.id == "Anchoviesfull"){
+    document.getElementById("Anchovies").src = 'images/toppings/anchovies-normal-01.png';
+    b.style = "background:#1286AA;";
+    document.getElementById('Anchoviesleft').style = "background:#FFF;";
+    document.getElementById('Anchoviesright').style = "background:#FFF;";
+  }
+  else if(b.id == "Anchoviesleft"){
+    document.getElementById("Anchovies").src = 'images/toppings/anchovies-left-01.png';
+    b.style = "background:#1286AA;";
+    document.getElementById('Anchoviesfull').style = "background:#FFF;";
+    document.getElementById('Anchoviesright').style = "background:#FFF;";
+  }
+  else if(b.id == "Anchoviesright"){
+    document.getElementById("Anchovies").src = 'images/toppings/anchovies-right-01.png';
+    b.style = "background:#1286AA;";
+    document.getElementById('Anchoviesleft').style = "background:#FFF;";
+    document.getElementById('Anchoviesfull').style = "background:#FFF;";
+  }
+  ////////////////////////
+  else if(b.id == "Onionsfull"){
+    document.getElementById("Onions").src = 'images/toppings/onions-normal-01.png';
+    b.style = "background:#1286AA;";
+    document.getElementById('Onionsleft').style = "background:#FFF;";
+    document.getElementById('Onionsright').style = "background:#FFF;";
+  }
+  else if(b.id == "Onionsleft"){
+    document.getElementById("Onions").src = 'images/toppings/onions-left-01.png';
+    b.style = "background:#1286AA;";
+    document.getElementById('Onionsfull').style = "background:#FFF;";
+    document.getElementById('Onionsright').style = "background:#FFF;";
+  }
+  else if(b.id == "Onionsright"){
+    document.getElementById("Onions").src = 'images/toppings/onions-right-01.png';
+    b.style = "background:#1286AA;";
+    document.getElementById('Onionsleft').style = "background:#FFF;";
+    document.getElementById('Onionsfull').style = "background:#FFF;";
+  }
+  ////////////////////////
+  else if(b.id == "Spinachfull"){
+    document.getElementById("Spinach").src = 'images/toppings/spinach-normal-01.png';
+    b.style = "background:#1286AA;";
+    document.getElementById('Spinachleft').style = "background:#FFF;";
+    document.getElementById('Spinachright').style = "background:#FFF;";
+  }
+  else if(b.id == "Spinachleft"){
+    document.getElementById("Spinach").src = 'images/toppings/spinach-left-01.png';
+    b.style = "background:#1286AA;";
+    document.getElementById('Spinachfull').style = "background:#FFF;";
+    document.getElementById('Spinachright').style = "background:#FFF;";
+  }
+  else if(b.id == "Spinachright"){
+    document.getElementById("Spinach").src = 'images/toppings/spinach-right-01.png';
+    b.style = "background:#1286AA;";
+    document.getElementById('Spinachleft').style = "background:#FFF;";
+    document.getElementById('Spinachfull').style = "background:#FFF;";
+  }
+  ////////////////////////
+  else if(b.id == "Green Peppersfull"){
+    document.getElementById("Peppers").src = 'images/toppings/peppers-normal-01.png';
+    b.style = "background:#1286AA;";
+    document.getElementById('Green Peppersleft').style = "background:#FFF;";
+    document.getElementById('Green Peppersright').style = "background:#FFF;";
+  }
+  else if(b.id == "Green Peppersleft"){
+    document.getElementById("Peppers").src = 'images/toppings/peppers-left-01.png';
+    b.style = "background:#1286AA;";
+    document.getElementById('Green Peppersfull').style = "background:#FFF;";
+    document.getElementById('Green Peppersright').style = "background:#FFF;";
+  }
+  else if(b.id == "Green Peppersright"){
+    document.getElementById("Peppers").src = 'images/toppings/peppers-right-01.png';
+    b.style = "background:#1286AA;";
+    document.getElementById('Green Peppersleft').style = "background:#FFF;";
+    document.getElementById('Green Peppersfull').style = "background:#FFF;";
+  }
+  ////////////////////////
+  else if(b.id == "Jalapeno Peppersfull"){
+    document.getElementById("Jalapenos").src = 'images/toppings/jalapeno-normal-01.png';
+    b.style = "background:#1286AA;";
+    document.getElementById('Jalapeno Peppersleft').style = "background:#FFF;";
+    document.getElementById('Jalapeno Peppersright').style = "background:#FFF;";
+  }
+  else if(b.id == "Jalapeno Peppersleft"){
+    document.getElementById("Jalapenos").src = 'images/toppings/jalapeno-left-01.png';
+    b.style = "background:#1286AA;";
+    document.getElementById('Jalapeno Peppersfull').style = "background:#FFF;";
+    document.getElementById('Jalapeno Peppersright').style = "background:#FFF;";
+  }
+  else if(b.id == "Jalapeno Peppersright"){
+    document.getElementById("Jalapenos").src = 'images/toppings/jalapeno-right-01.png';
+    b.style = "background:#1286AA;";
+    document.getElementById('Jalapeno Peppersleft').style = "background:#FFF;";
+    document.getElementById('Jalapeno Peppersfull').style = "background:#FFF;";
+  }
 }
