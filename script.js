@@ -98,6 +98,7 @@ function changeSize(evt){
   // }
 }
 function addToOrder(evt) {
+  alert("Thanks for your purchase! That will be " + document.getElementById("endOrder").children[0].innerHTML.substr(7) + "!");
   currentToppings = [];
   for(var i = 0; i < document.getElementsByClassName("topping").length; i++) {
     currentToppings[i] = "";
@@ -124,7 +125,6 @@ function addToOrder(evt) {
   else if(evt.path[1].id == "prebuiltPizza5") {
     document.getElementById("endOrder").children[0].innerHTML = "Total: $5.00";
   }
-  alert("Thanks for your purchase! That will be " + document.getElementById("endOrder").children[0].innerHTML.substr(7) + "!");
   prebuiltTab(null);
 }
 
@@ -137,6 +137,7 @@ function addToPizza(evt) {
     currentToppings[num] = evt.target.value;
   }
   drawPizza();
+  setPrice();
 }
 
 function setPrice() {
@@ -360,7 +361,6 @@ function updateToppingList(){
       document.getElementById('yourToppingsList').appendChild(d);
     }
   }
-  setPrice();
 }
 function modToppings(evt){
   values[values.length] = evt.target.value;
