@@ -49,12 +49,15 @@ function FillPizza() {
   var crust = new Image(250, 250);
   crust.src = 'images/crusts/regular-01.png';
   crust.style = "z-index:2; position:absolute; top:0px; left:0px;";
+  crust.className = "imgPizza";
   var sauce = new Image(250, 250);
   sauce.src = 'images/sauces/normal-01.png';
   sauce.style = "z-index:3; position:absolute;top:0px; left:0px;";
+  sauce.className = "imgPizza";
   var cheese = new Image(250, 250);
   cheese.src = 'images/cheeses/normal-01.png';
   cheese.style = "z-index:4; position:absolute;top:0px; left:0px;";
+  cheese.className = "imgPizza";
   pizza.appendChild(crust);
   pizza.appendChild(sauce);
   pizza.appendChild(cheese);
@@ -98,6 +101,30 @@ function addToPizza(evt) {
 }
 
 function changePizza(evt) {
+  var a = evt.target;
+  if(a.id == "selSize"){
+    if(a.selectedIndex == 0){
+      document.getElementById('pizzaDrawing').style = 'height: 210px; width: 210px;';
+      var images = document.getElementsByClassName('imgPizza');
+      for(var i = 0; i < images.length; i++){
+        images[i].style = "height: 210px; width: 210px;";
+      }
+    }
+    else if(a.selectedIndex == 1){
+      document.getElementById('pizzaDrawing').style = 'height: 225px; width: 225px;';
+      var images = document.getElementsByClassName('imgPizza');
+      for(var i = 0; i < images.length; i++){
+        images[i].style = "height: 225px; width: 225px;";
+      }
+    }
+    else if(a.selectedIndex == 2){
+      document.getElementById('pizzaDrawing').style = 'height: 250px; width: 250px;';
+      var images = document.getElementsByClassName('imgPizza');
+      for(var i = 0; i < images.length; i++){
+        images[i].style = "height: 250px; width: 250px;";
+      }
+    }
+  }
   // document.getElementById("sizeSetting").children[1].value
   // document.getElementById("crustSetting").children[1].value
   // document.getElementById("sauceSetting").children[1].value
@@ -129,6 +156,7 @@ function drawPizza() {
   for (i = 0; i < currentToppings.length; i++) {
     if (currentToppings[i] != "") {
       var img = new Image(250, 250);
+      img.className = 'imgPizza';
       switch (i) {
         case 0:
           img.src = "images/toppings/pepperoni-normal-01.png";
@@ -213,14 +241,19 @@ function updateToppingList(){
       var d = document.createElement("div");
       var l = document.createElement('label');
       var s = document.createElement('select');
-      s.setAttribute("options", options);
+      for(var j = 0; j < options.length; j++) {
+        var opt = options[j];
+        var el = document.createElement("option");
+        el.textContent = opt;
+        el.value = opt;
+        s.appendChild(el);
+      }
       var full = document.createElement('button');
       var left = document.createElement('button');
       var right = document.createElement('button');
       d.className = 'toppingListElement';
       l.innerHTML = (currentToppings[i]);
       full.className = 'btnFullPizza';
-      //setAttribute
       left.className = 'btnLeftPizza';
       right.className = 'btnRightPizza';
       d.appendChild(l);
