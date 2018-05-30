@@ -4,6 +4,7 @@
 <head>
   <title>Pizza and Stuff</title>
   <link href="style.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
 </head>
 
 <body>
@@ -14,29 +15,29 @@
         <p class="mainTab">Prebuilt Pizzas</p>
       </div>
       <div class="pizzaTab">
-        <p class="mainTab">Customize</p>
+        <p id='lblCustom' class="mainTab">Customize</p>
         <section id="pizzaSettings">
           <div id="sizeSetting" class="pizzaSetting">
             <p>Size</p>
-            <select id="selSize">
-              <option>Small</option>
-              <option>Medium</option>
-              <option>Large</option>
-              <option>Extra</option>
+            <select id="selSize" autocomplete="off">
+              <option value='small'>Small</option>
+              <option value='medium'>Medium</option>
+              <option value='large'>Large</option>
+              <option value='extra'>Extra</option>
             </select>
           </div>
           <div id="crustSetting" class="pizzaSetting">
             <p>Crust</p>
-            <select id="selCrust">
-              <option>Regular</option>
-              <option>Thin</option>
-              <option>Stuffed</option>
-              <option>Garlic</option>
+            <select id="selCrust" autocomplete="off">
+              <option value='regular'>Regular</option>
+              <option value='thin'>Thin</option>
+              <option value='stuffed'>Stuffed</option>
+              <option value='garlic'>Garlic</option>
             </select>
           </div>
           <div id="cheeseSetting" class="pizzaSetting">
             <p>Cheese</p>
-            <select id="selCheese">
+            <select id="selCheese" autocomplete="off">
               <option>Normal</option>
               <option>Light</option>
               <option>Double</option>
@@ -90,7 +91,7 @@
         </div>
       </div>
       <div id="customHolder">
-        <div id="modDisplay">
+        <!-- <div id="modDisplay">
           <div class='modRow'>
             <div class='mod'>
               <label>Size: </label>
@@ -129,7 +130,7 @@
               </select>
             </div>
           </div>
-        </div>
+        </div> -->
         <div id="pizzaDisplay" class="box">
           <label id='lblBonus'>5 Toppings Deal!</label>
           <div id='pizzaDrawing'>

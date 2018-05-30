@@ -6,7 +6,8 @@ var buttons = document.getElementsByClassName("btn");
 
 prebuiltPizza.addEventListener("click", prebuiltTab);
 customizePizza.addEventListener("click", customizeTab);
-
+document.getElementById("selCrust").addEventListener("change", changeCrust);
+document.getElementById("selSize").addEventListener("change", changeSize);
 for (var i = 0; i < buttons.length; i++) {
   if (buttons[i].innerHTML == "Add to Order") {
     buttons[i].addEventListener("click", addToOrder);
@@ -27,6 +28,7 @@ function prebuiltTab(evt) {
   document.getElementById("customHolder").style.display = "none";
   document.getElementById("orderBtn").style.display = "none";
   document.getElementById("pizzaSettings").style.display = "none";  
+  document.getElementById("lblCustom").style.display = "flex";
 }
 
 function customizeTab(evt) {
@@ -35,29 +37,65 @@ function customizeTab(evt) {
   document.getElementById("customHolder").style.display = "flex";
   document.getElementById("orderBtn").style.display = "flex";
   document.getElementById("orderBtn").style.marginLeft = "auto";
-  document.getElementById("pizzaSettings").style.display = "flex";  
+  document.getElementById("pizzaSettings").style.visibility = "visible";
+  document.getElementById("pizzaSettings").style.display = "flex";
+  document.getElementById("lblCustom").style.display = "none";
   FillPizza();
 }
 
 function FillPizza() {
   var pizza = document.getElementById('pizzaDrawing');
-  var crust = new Image(250, 250);
-  crust.src = 'images/crusts/regular-01.png';
-  crust.style = "z-index:2; position:absolute; top:0px; left:0px;";
-  crust.className = "imgPizza";
-  var sauce = new Image(250, 250);
-  sauce.src = 'images/sauces/normal-01.png';
-  sauce.style = "z-index:3; position:absolute;top:0px; left:0px;";
-  sauce.className = "imgPizza";
-  var cheese = new Image(250, 250);
-  cheese.src = 'images/cheeses/normal-01.png';
-  cheese.style = "z-index:4; position:absolute;top:0px; left:0px;";
-  cheese.className = "imgPizza";
-  pizza.appendChild(crust);
-  pizza.appendChild(sauce);
-  pizza.appendChild(cheese);
+  if(pizza.childElementCount == 0){
+    var crust = new Image(250, 250);
+    crust.src = 'images/crusts/regular-01.png';
+    crust.style = "z-index:2; position:absolute; top:0px; left:0px;";
+    crust.className = "imgPizza";
+    crust.id = 'crust';
+    var sauce = new Image(250, 250);
+    sauce.src = 'images/sauces/normal-01.png';
+    sauce.style = "z-index:3; position:absolute;top:0px; left:0px;";
+    sauce.className = "imgPizza";
+    var cheese = new Image(250, 250);
+    cheese.src = 'images/cheeses/normal-01.png';
+    cheese.style = "z-index:4; position:absolute;top:0px; left:0px;";
+    cheese.className = "imgPizza";
+    pizza.appendChild(crust);
+    pizza.appendChild(sauce);
+    pizza.appendChild(cheese);
+  }
 }
-
+function changeCrust(evt){
+  var x = evt.target.value;
+  if(x == 'regular'){
+    document.getElementById('crust').src='images/crusts/regular-01.png';
+  }
+  else if(x == 'thin'){
+    document.getElementById('crust').src='images/crusts/thin-01.png';
+  }
+  else if(x == 'stuffed'){
+    document.getElementById('crust').src='images/crusts/stuffed-01.png';
+  }
+  else if(x == 'garlic'){
+    document.getElementById('crust').src='images/crusts/garlic-01.png';
+  }
+  setPrice()
+}
+function changeSize(evt){
+  var x = evt.target.value;
+  setPrice();
+  // if(x == 'small'){
+  //   document.getElementsByClassName('imgPizza').style = 'height:215px; width: 215px;'
+  // }
+  // else if(x == 'medium'){
+  //   document.getElementsByClassName('imgPizza').style = 'height:230px; width: 230px;'
+  // }
+  // else if(x == 'large'){
+  //   document.getElementsByClassName('imgPizza').style = 'height:250px; width: 250px;'
+  // }
+  // else if(x == 'extra'){
+  //   document.getElementsByClassName('imgPizza').style = 'height:265px; width: 265px;'
+  // }
+}
 function addToOrder(evt) {
   //reset everything
   if(evt.path[1].id == "prebuiltPizza1") {
@@ -91,30 +129,7 @@ function addToPizza(evt) {
 }
 
 function changePizza(evt) {
-  var a = evt.target;
-  if(a.id == "selSize"){
-    if(a.selectedIndex == 0){
-      document.getElementById('pizzaDrawing').style = 'height: 210px; width: 210px;';
-      var images = document.getElementsByClassName('imgPizza');
-      for(var i = 0; i < images.length; i++){
-        images[i].style = "height: 210px; width: 210px;";
-      }
-    }
-    else if(a.selectedIndex == 1){
-      document.getElementById('pizzaDrawing').style = 'height: 225px; width: 225px;';
-      var images = document.getElementsByClassName('imgPizza');
-      for(var i = 0; i < images.length; i++){
-        images[i].style = "height: 225px; width: 225px;";
-      }
-    }
-    else if(a.selectedIndex == 2){
-      document.getElementById('pizzaDrawing').style = 'height: 250px; width: 250px;';
-      var images = document.getElementsByClassName('imgPizza');
-      for(var i = 0; i < images.length; i++){
-        images[i].style = "height: 250px; width: 250px;";
-      }
-    }
-  }
+  
   // document.getElementById("sizeSetting").children[1].value
   // document.getElementById("crustSetting").children[1].value
   // document.getElementById("sauceSetting").children[1].value
@@ -127,6 +142,23 @@ function setPrice() {
   var list = document.getElementById("yourToppingsList");
   var firstDisc = false;
   var secondDisc = false;
+  var size = document.getElementById("selSize").value;
+  var crust = document.getElementById("selCrust").value;
+  if(size == "small"){
+    price += 4;
+  }
+  else if(size == "medium"){
+    price += 6;
+  }
+  else if(size == "large"){
+    price += 8;
+  }
+  else if(size == "extra"){
+    price += 10;
+  }
+  if(crust == 'stuffed'){
+    price += 1.50
+  }
   for(var i = 0; i < list.children.length; i++) {
     if(list.children[i].children[1].value == "Regular") {
       toppings++; 
@@ -231,9 +263,11 @@ function drawPizza() {
     }
     if (counter > 0){
       document.getElementById('lblToppings').style = "visibility:visible";
+      document.getElementById('yourToppingsList').style = "visibility:visible";
     }
     else{
       document.getElementById('lblToppings').style = "visibility:hidden";
+      document.getElementById('yourToppingsList').style = "visibility:hidden";
     }
     
   }
@@ -254,6 +288,9 @@ function updateToppingList(){
       var d = document.createElement("div");
       var l = document.createElement('label');
       var s = document.createElement('select');
+      d.style = "line-height:30px; vertical-text-align: center; margin-bottom: 5px;"
+      l.style = "margin-right:3px";
+      s.style = "margin-right:3px";
       for(var j = 0; j < options.length; j++) {
         var opt = options[j];
         var el = document.createElement("option");
@@ -275,7 +312,7 @@ function updateToppingList(){
       full.id = l.innerHTML + 'full';
       left.id = l.innerHTML + 'left';
       right.id = l.innerHTML + 'right';
-      full.style = 'background: #1286AA;';
+      full.style = 'background:#1286AA';
       full.addEventListener('click', halves);
       left.addEventListener('click', halves);
       right.addEventListener('click', halves);
