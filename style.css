@@ -139,7 +139,6 @@ html{
 #prebuiltHolder {
   display: flex;
   flex-direction: row;
-  border-bottom: 1px solid #555;  
 }
 #prebuiltPizza1 img {
   background: url(images/toppings/sausage-normal-01.png),
@@ -206,6 +205,9 @@ html{
   flex-direction: row;
   margin-top: auto;
   padding: 0% 3%;
+}
+#endOrder p {
+  display: none;
 }
 #orderBtn {
   display: none;

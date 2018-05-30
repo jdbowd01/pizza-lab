@@ -6,6 +6,7 @@ var buttons = document.getElementsByClassName("btn");
 
 prebuiltPizza.addEventListener("click", prebuiltTab);
 customizePizza.addEventListener("click", customizeTab);
+
 document.getElementById("selCrust").addEventListener("change", changeCrust);
 document.getElementById("selSize").addEventListener("change", changeSize);
 document.getElementById("selCheese").addEventListener("change", changeSize);
@@ -20,9 +21,6 @@ for (var i = 0; i < buttons.length; i++) {
 for (var i = 0; i < 10; i++) {
   document.getElementById("tpg" + i).addEventListener("change", addToPizza);
 }
-// for (var i = 0; i < 4; i++) {
-//   document.getElementsByClassName("pizzaSetting")[i].children[1].addEventListener("change", changePizza);
-// }
 
 function prebuiltTab(evt) {
   document.getElementById("endOrder").children[0].innerHTML = "Total: $0.00";
@@ -30,6 +28,7 @@ function prebuiltTab(evt) {
   document.getElementById("prebuiltHolder").style.display = "flex";
   document.getElementById("customHolder").style.display = "none";
   document.getElementById("orderBtn").style.display = "none";
+  document.getElementById("endOrder").children[0].style.display = "none";
   document.getElementById("pizzaSettings").style.display = "none";  
 }
 
@@ -40,6 +39,7 @@ function customizeTab(evt) {
   document.getElementById("orderBtn").style.display = "flex";
   document.getElementById("orderBtn").style.marginLeft = "auto";
   document.getElementById("pizzaSettings").style.display = "flex";
+  document.getElementById("endOrder").children[0].style.display = "flex";  
   FillPizza();
 }
 
@@ -98,17 +98,11 @@ function changeSize(evt){
   // }
 }
 function addToOrder(evt) {
-  currentToppings = ["","","","","","","","","",""];
-  document.getElementById("tpg0").checked = false;
-  document.getElementById("tpg1").checked = false;
-  document.getElementById("tpg2").checked = false;
-  document.getElementById("tpg3").checked = false;
-  document.getElementById("tpg4").checked = false;
-  document.getElementById("tpg5").checked = false;
-  document.getElementById("tpg6").checked = false;
-  document.getElementById("tpg7").checked = false;
-  document.getElementById("tpg8").checked = false;
-  document.getElementById("tpg9").checked = false;  
+  currentToppings = [];
+  for(var i = 0; i < document.getElementsByClassName("topping").length; i++) {
+    currentToppings[i] = "";
+    document.getElementsByClassName("topping")[i].children[0].checked = false;
+  }
   document.getElementById("selSize").value = "medium";
   document.getElementById("selCrust").value = "regular";
   document.getElementById("selCheese").value = "Normal";
