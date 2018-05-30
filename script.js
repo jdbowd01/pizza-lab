@@ -96,7 +96,6 @@ function addToPizza(evt) {
   else {
     currentToppings[num] = evt.target.value;
   }
-  setPrice();
   drawPizza();
 }
 
@@ -133,17 +132,37 @@ function changePizza(evt) {
 
 function setPrice() {
   var toppings = 0;
-  for(var i = 0; i < 10; i++) {
-    if(currentToppings[i] != "") {
-      toppings += 1;
+  var price = 0;
+  var list = document.getElementById("yourToppingsList");
+  var firstDisc = false;
+  var secondDisc = false;
+  for(var i = 0; i < list.children.length; i++) {
+    if(list.children[i].children[1].value == "Regular") {
+      toppings++; 
+      price += 1;
+    }
+    else if(list.children[i].children[1].value == "Light") {
+      toppings++;
+      price += .50;
+    }
+    else {
+      toppings += 2;
+      price += 2;
+    }
+    if(toppings > 0) {
+      if(!firstDisc) {
+        firstDisc = true;
+        price -= 1;
+      }
+    }
+    if(toppings > 4) {
+      if(!secondDisc) {
+        secondDisc = true;
+        price -= 1;
+      }
     }
   }
-  if(toppings > 1 && toppings < 5) {
-    document.getElementById("endOrder").children[0].innerHTML = "Total: $" + (toppings - 1) + ".00";
-  }
-  else if(toppings > 5) {
-    document.getElementById("endOrder").children[0].innerHTML = "Total: $" + (toppings - 2) + ".00";    
-  }
+  document.getElementById("endOrder").children[0].innerHTML = "Total: $" +  price.toFixed(2);
 }
 
 function drawPizza() {
@@ -264,4 +283,5 @@ function updateToppingList(){
       document.getElementById('yourToppingsList').appendChild(d);
     }
   }
+  setPrice();
 }
