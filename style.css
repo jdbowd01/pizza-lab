@@ -76,6 +76,23 @@
 .mod{
   margin: 5px;
 }
+.btnFullPizza{
+  width: 30px;
+  height: 30px;
+  border-radius: 90px;
+}
+.btnLeftPizza{
+  width: 15px;
+  height: 30px;
+  border-top-left-radius: 90px;
+  border-bottom-left-radius: 90px;
+}
+.btnRightPizza{
+  width: 15px;
+  height: 30px;
+  border-top-right-radius: 90px;
+  border-bottom-right-radius: 90px;
+}
 
 #titleBar {
   text-align: center;
@@ -239,24 +256,6 @@
 #modDisplay{
   display: none;
   text-align: center;
-}
-
-.btnFullPizza{
-  width: 30px;
-  height: 30px;
-  border-radius: 90px;
-}
-.btnLeftPizza{
-  width: 15px;
-  height: 30px;
-  border-top-left-radius: 90px;
-  border-bottom-left-radius: 90px;
-}
-.btnRightPizza{
-  width: 15px;
-  height: 30px;
-  border-top-right-radius: 90px;
-  border-bottom-right-radius: 90px;
 }
 @media all and (max-width:700px) {
   .pizzaTab {

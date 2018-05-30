@@ -11,9 +11,6 @@ for (var i = 0; i < buttons.length; i++) {
   if (buttons[i].innerHTML == "Add to Order") {
     buttons[i].addEventListener("click", addToOrder);
   }
-  else if (buttons[i].innerHTML == "Checkout") {
-    buttons[i].addEventListener("click", goToCheckout);
-  }
 }
 
 for (var i = 0; i < 10; i++) {
@@ -29,7 +26,6 @@ function prebuiltTab(evt) {
   document.getElementById("prebuiltHolder").style.display = "flex";
   document.getElementById("customHolder").style.display = "none";
   document.getElementById("orderBtn").style.display = "none";
-  document.getElementById("checkoutBtn").style.marginLeft = "auto";
   document.getElementById("pizzaSettings").style.display = "none";  
 }
 
@@ -39,7 +35,6 @@ function customizeTab(evt) {
   document.getElementById("customHolder").style.display = "flex";
   document.getElementById("orderBtn").style.display = "flex";
   document.getElementById("orderBtn").style.marginLeft = "auto";
-  document.getElementById("checkoutBtn").style.marginLeft = "2%";
   document.getElementById("pizzaSettings").style.display = "flex";  
   FillPizza();
 }
@@ -82,10 +77,6 @@ function addToOrder(evt) {
   }
   alert("Thanks for your purchase! That will be " + document.getElementById("endOrder").children[0].innerHTML.substr(7) + "!");
   prebuiltTab(null);
-}
-
-function goToCheckout(evt) {
-
 }
 
 function addToPizza(evt) {
