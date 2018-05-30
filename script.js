@@ -8,6 +8,9 @@ prebuiltPizza.addEventListener("click", prebuiltTab);
 customizePizza.addEventListener("click", customizeTab);
 document.getElementById("selCrust").addEventListener("change", changeCrust);
 document.getElementById("selSize").addEventListener("change", changeSize);
+document.getElementById("selCheese").addEventListener("change", changeSize);
+document.getElementById("selSauce").addEventListener("change", changeSize);
+
 for (var i = 0; i < buttons.length; i++) {
   if (buttons[i].innerHTML == "Add to Order") {
     buttons[i].addEventListener("click", addToOrder);
@@ -17,9 +20,9 @@ for (var i = 0; i < buttons.length; i++) {
 for (var i = 0; i < 10; i++) {
   document.getElementById("tpg" + i).addEventListener("change", addToPizza);
 }
-for (var i = 0; i < 4; i++) {
-  document.getElementsByClassName("pizzaSetting")[i].children[1].addEventListener("change", changePizza);
-}
+// for (var i = 0; i < 4; i++) {
+//   document.getElementsByClassName("pizzaSetting")[i].children[1].addEventListener("change", changePizza);
+// }
 
 function prebuiltTab(evt) {
   document.getElementById("endOrder").children[0].innerHTML = "Total: $0.00";
@@ -28,7 +31,6 @@ function prebuiltTab(evt) {
   document.getElementById("customHolder").style.display = "none";
   document.getElementById("orderBtn").style.display = "none";
   document.getElementById("pizzaSettings").style.display = "none";  
-  document.getElementById("lblCustom").style.display = "flex";
 }
 
 function customizeTab(evt) {
@@ -37,9 +39,7 @@ function customizeTab(evt) {
   document.getElementById("customHolder").style.display = "flex";
   document.getElementById("orderBtn").style.display = "flex";
   document.getElementById("orderBtn").style.marginLeft = "auto";
-  document.getElementById("pizzaSettings").style.visibility = "visible";
   document.getElementById("pizzaSettings").style.display = "flex";
-  document.getElementById("lblCustom").style.display = "none";
   FillPizza();
 }
 
@@ -63,6 +63,7 @@ function FillPizza() {
     pizza.appendChild(sauce);
     pizza.appendChild(cheese);
   }
+  setPrice();
 }
 function changeCrust(evt){
   var x = evt.target.value;
@@ -78,7 +79,7 @@ function changeCrust(evt){
   else if(x == 'garlic'){
     document.getElementById('crust').src='images/crusts/garlic-01.png';
   }
-  setPrice()
+  setPrice();
 }
 function changeSize(evt){
   var x = evt.target.value;
@@ -97,12 +98,28 @@ function changeSize(evt){
   // }
 }
 function addToOrder(evt) {
-  //reset everything
+  currentToppings = ["","","","","","","","","",""];
+  document.getElementById("tpg0").checked = false;
+  document.getElementById("tpg1").checked = false;
+  document.getElementById("tpg2").checked = false;
+  document.getElementById("tpg3").checked = false;
+  document.getElementById("tpg4").checked = false;
+  document.getElementById("tpg5").checked = false;
+  document.getElementById("tpg6").checked = false;
+  document.getElementById("tpg7").checked = false;
+  document.getElementById("tpg8").checked = false;
+  document.getElementById("tpg9").checked = false;  
+  document.getElementById("selSize").value = "medium";
+  document.getElementById("selCrust").value = "regular";
+  document.getElementById("selCheese").value = "Normal";
+  document.getElementById("selSauce").value = "Normal";
+  drawPizza();
+
   if(evt.path[1].id == "prebuiltPizza1") {
     document.getElementById("endOrder").children[0].innerHTML = "Total: $5.00";
   }
   else if(evt.path[1].id == "prebuiltPizza2") {
-    document.getElementById("endOrder").children[0].innerHTML = "Total: $9.00";
+    document.getElementById("endOrder").children[0].innerHTML = "Total: $6.00";
   }
   else if(evt.path[1].id == "prebuiltPizza3") {
     document.getElementById("endOrder").children[0].innerHTML = "Total: $6.50";
@@ -128,14 +145,6 @@ function addToPizza(evt) {
   drawPizza();
 }
 
-function changePizza(evt) {
-  
-  // document.getElementById("sizeSetting").children[1].value
-  // document.getElementById("crustSetting").children[1].value
-  // document.getElementById("sauceSetting").children[1].value
-  // document.getElementById("cheeseSetting").children[1].value
-}
-
 function setPrice() {
   var toppings = 0;
   var price = 0;
@@ -144,6 +153,8 @@ function setPrice() {
   var secondDisc = false;
   var size = document.getElementById("selSize").value;
   var crust = document.getElementById("selCrust").value;
+  var cheese = document.getElementById("selCheese").value;
+  var sauce = document.getElementById("selSauce").value;
   if(size == "small"){
     price += 4;
   }
@@ -156,8 +167,38 @@ function setPrice() {
   else if(size == "extra"){
     price += 10;
   }
+
   if(crust == 'stuffed'){
-    price += 1.50
+    price += 2;
+  }
+  else if(crust == 'thin') {
+    price += .50;
+  }
+  else if(crust == 'garlic') {
+    price += 1.5;
+  }
+  else if(crust == 'regular') {
+    price += 1;
+  }
+
+  if(cheese == 'Normal') {
+    price += 1;
+  }
+  else if(cheese == 'Light') {
+    price += .5;
+  }
+  else if(cheese == 'Double') {
+    price += 2;
+  }
+
+  if(sauce == 'Normal') {
+    price += 1;
+  }
+  else if(sauce == 'Light') {
+    price += .5;
+  }
+  else if(sauce == 'Double') {
+    price += 2;    
   }
   for(var i = 0; i < list.children.length; i++) {
     if(list.children[i].children[1].value == "Regular") {
@@ -291,6 +332,7 @@ function updateToppingList(){
       d.style = "line-height:30px; vertical-text-align: center; margin-bottom: 5px;"
       l.style = "margin-right:3px";
       s.style = "margin-right:3px";
+      s.addEventListener("change", setPrice);
       for(var j = 0; j < options.length; j++) {
         var opt = options[j];
         var el = document.createElement("option");
