@@ -1,0 +1,53 @@
+  currentToppings = [];
+
+  GOES IN CREATETOPPINGS
+    currentToppings[i] = "";
+  
+  GOES IN UPDATETOPPINGLIST
+  // while (list.hasChildNodes()) { 
+  //   list.removeChild(list.lastChild);
+  // }
+  // var options = ["Regular", "Light", "Double"];
+  // for(var i = 0; i< currentToppings.length; i++){
+  //   if(currentToppings[i] != ""){
+  //     var d = document.createElement("div");
+  //     var l = document.createElement('label');
+  //     var s = document.createElement('select');
+  //     d.style = "line-height:30px; vertical-text-align: center; margin-bottom: 5px;"
+  //     l.style = "margin-right:3px";
+  //     s.style = "margin-right:3px";
+  //     s.addEventListener("change", setPrice);
+  //     for(var j = 0; j < options.length; j++) {
+  //       var opt = options[j];
+  //       var el = document.createElement("option");
+  //       el.textContent = opt;
+  //       el.value = opt;
+  //       s.appendChild(el);
+  //     }
+  //     selectors[selectors.length] = s;
+  //     values[values.length] = s.value;
+  //     s.addEventListener('change', modToppings);
+  //     var full = document.createElement('button');
+  //     var left = document.createElement('button');
+  //     var right = document.createElement('button');
+  //     d.className = 'toppingListElement';
+  //     l.innerHTML = (currentToppings[i]);
+  //     full.className = 'btnFullPizza';
+  //     left.className = 'btnLeftPizza';
+  //     right.className = 'btnRightPizza';
+  //     full.id = l.innerHTML + 'full';
+  //     left.id = l.innerHTML + 'left';
+  //     right.id = l.innerHTML + 'right';
+  //     full.style = 'background:#1286AA';
+  //     full.addEventListener('click', halves);
+  //     left.addEventListener('click', halves);
+  //     right.addEventListener('click', halves);
+  //     d.appendChild(l);
+  //     d.appendChild(s);
+  //     d.appendChild(full);
+  //     d.appendChild(left);
+  //     d.appendChild(right);
+  //     document.getElementById('yourToppingsList').appendChild(d);
+  //   }
+  // }
+
