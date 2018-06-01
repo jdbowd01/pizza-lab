@@ -67,6 +67,11 @@ html{
 .topping{
   width: 120px;
 }
+.imgPizza {
+  padding: 0% 10%;
+  width: 80%;
+  height: auto;
+}
 .box{
   display: flex;
 }
@@ -98,6 +103,23 @@ html{
   border-top-right-radius: 90px;
   border-bottom-right-radius: 90px;
   margin-left: 3px;
+}
+.btnFullPizza{
+  width: 30px;
+  height: 30px;
+  border-radius: 90px;
+}
+.btnLeftPizza{
+  width: 15px;
+  height: 30px;
+  border-top-left-radius: 90px;
+  border-bottom-left-radius: 90px;
+}
+.btnRightPizza{
+  width: 15px;
+  height: 30px;
+  border-top-right-radius: 90px;
+  border-bottom-right-radius: 90px;
 }
 
 #titleBar {
@@ -264,24 +286,6 @@ html{
 #modDisplay{
   display: none;
   text-align: center;
-}
-
-.btnFullPizza{
-  width: 30px;
-  height: 30px;
-  border-radius: 90px;
-}
-.btnLeftPizza{
-  width: 15px;
-  height: 30px;
-  border-top-left-radius: 90px;
-  border-bottom-left-radius: 90px;
-}
-.btnRightPizza{
-  width: 15px;
-  height: 30px;
-  border-top-right-radius: 90px;
-  border-bottom-right-radius: 90px;
 }
 #yourToppingsList{
   margin-left: auto;
