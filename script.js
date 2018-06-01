@@ -1,5 +1,7 @@
 var toppingsList = ["Pepperoni", "Sausage", "Bacon", "Chicken", "Ham", "Anchovies", "Onions", "Spinach", "Green Peppers", "Jalapeno Peppers"]; 
 var currentToppingsList = [];
+var picWidth = "80%";
+var picPadding = "0% 10%";
 
 var prebuiltPizza = document.getElementsByClassName("pizzaTab")[0];
 var customizePizza = document.getElementsByClassName("pizzaTab")[1];
@@ -64,6 +66,7 @@ function FillPizza() {
   pizza.appendChild(crust);
   pizza.appendChild(sauce);
   pizza.appendChild(cheese);
+  setPrice();  
 }
 function setPrice() {
   var toppings = 0;
@@ -152,11 +155,11 @@ function setPrice() {
 function drawPizza(remove, image) {
   var pizza = document.getElementById('pizzaDrawing');  
   if(!remove) {
-    var img = new Image(pizzaSize, pizzaSize);
+    var img = document.createElement("img");
     img.className = 'imgPizza';
     img.src = "images/toppings/" + currentToppingsList[currentToppingsList.length - 1].split(' ').join('-').toLowerCase() + "-normal-01.png";
     img.id = currentToppingsList[currentToppingsList.length - 1].split(' ').join('');
-    img.style = "z-index:5; position:absolute; top:0px; left:0px;";
+    img.style = "z-index:5; position:absolute; top:0px; left:0px; width:" + picWidth + ";height:auto; padding:" + picPadding;
     pizza.appendChild(img);
   }
   else {
@@ -249,6 +252,12 @@ function resetPizza() {
   while(pizza.hasChildNodes()) {
     pizza.removeChild(pizza.lastChild)
   }
+  currentToppingsList = [];
+  document.getElementById('lblToppings').style = "visibility:hidden";
+  document.getElementById('yourToppingsList').style = "visibility:hidden";
+  document.getElementById('lblBonus').style = "visibility:hidden";
+  prebuiltTab(null);
+  FillPizza();
 }
 
 function prebuiltTab(evt) {
@@ -288,27 +297,34 @@ function changeCrust(evt){
 function changeSize(evt){
   var x = document.getElementById("selSize").value;
   for(var i = 0; i < document.getElementById("pizzaDrawing").children.length; i++) {
-    console.log(document.getElementById("pizzaDrawing").children[i].width);
     switch(x) {
       case 'small':
-        document.getElementById("pizzaDrawing").children[i].style.width = "70%";
-        document.getElementById("pizzaDrawing").children[i].style.height = "70%";
-        document.getElementById("pizzaDrawing").children[i].style.padding = "0% 15%";        
+        picWidth = "70%";
+        picPadding = "0% 15%";
+        document.getElementById("pizzaDrawing").children[i].style.width = picWidth;
+        document.getElementById("pizzaDrawing").children[i].style.height = picWidth;
+        document.getElementById("pizzaDrawing").children[i].style.padding = picPadding;        
         break;
       case 'medium':
-        document.getElementById("pizzaDrawing").children[i].style.width = "80%";
-        document.getElementById("pizzaDrawing").children[i].style.height = "80%";
-        document.getElementById("pizzaDrawing").children[i].style.padding = "0% 10%";
+        picWidth = "80%";
+        picPadding = "0% 10%";
+        document.getElementById("pizzaDrawing").children[i].style.width = picWidth;
+        document.getElementById("pizzaDrawing").children[i].style.height = picWidth;
+        document.getElementById("pizzaDrawing").children[i].style.padding = picPadding;
         break;
       case 'large':
-        document.getElementById("pizzaDrawing").children[i].style.width = "90%";
-        document.getElementById("pizzaDrawing").children[i].style.height = "90%";
-        document.getElementById("pizzaDrawing").children[i].style.padding = "0% 5%";        
+        picWidth = "90%";
+        picPadding = "0% 5%";
+        document.getElementById("pizzaDrawing").children[i].style.width = picWidth;
+        document.getElementById("pizzaDrawing").children[i].style.height = picWidth;
+        document.getElementById("pizzaDrawing").children[i].style.padding = picPadding;        
         break;
       case 'extra':
-        document.getElementById("pizzaDrawing").children[i].style.width = "100%";
-        document.getElementById("pizzaDrawing").children[i].style.height = "100%";
-        document.getElementById("pizzaDrawing").children[i].style.padding = "0% 0%";        
+        picWidth = "100%";
+        picPadding = "0% 0%";
+        document.getElementById("pizzaDrawing").children[i].style.width = picWidth;
+        document.getElementById("pizzaDrawing").children[i].style.height = picWidth;
+        document.getElementById("pizzaDrawing").children[i].style.padding = picPadding;        
         break;
     }
   }
@@ -378,13 +394,11 @@ function addToOrder(evt) {
     document.getElementsByClassName("topping")[i].children[0].checked = false;
   }
   for(var j = 0; j < currentToppingsList.length; j++) {
-    removeFromYourToppings(document.getElementById("yourToppingsList").childNodes[i]);
+    removeFromYourToppings(document.getElementById("yourToppingsList").lastChild);
   }
   document.getElementById("selSize").value = "medium";
   document.getElementById("selCrust").value = "regular";
   document.getElementById("selCheese").value = "Normal";
   document.getElementById("selSauce").value = "Normal";
-  resetPizza();
-  
-  prebuiltTab(null);
+  resetPizza();  
 }
