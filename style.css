@@ -157,7 +157,7 @@ html{
   min-width: 100px;
   min-height: 100px;
   background: url(images/toppings/spinach-normal-01.png),
-  url(images/toppings/peppers-normal-01.png),
+  url(images/toppings/green-peppers-normal-01.png),
   url(images/toppings/onions-normal-01.png),
   url(images/cheeses/double-01.png),
   url(images/sauces/light-01.png),
@@ -167,7 +167,7 @@ html{
   background-position: center, center, center, center, center, center;
 }
 #prebuiltPizza3 img {
-  background: url(images/toppings/jalapeno-normal-01.png),
+  background: url(images/toppings/jalapeno-peppers-normal-01.png),
   url(images/toppings/bacon-normal-01.png),
   url(images/toppings/chicken-normal-01.png),
   url(images/cheeses/double-01.png),
@@ -180,7 +180,7 @@ html{
 #prebuiltPizza4 img {
   background: url(images/toppings/sausage-normal-01.png),
   url(images/toppings/pepperoni-normal-01.png),
-  url(images/toppings/peppers-normal-01.png),
+  url(images/toppings/green-peppers-normal-01.png),
   url(images/toppings/onions-normal-01.png),
   url(images/cheeses/normal-01.png),
   url(images/sauces/normal-01.png),
@@ -190,7 +190,7 @@ html{
   background-position: center, center, center, center, center, center, center;
 }
 #prebuiltPizza5 img {
-  background: url(images/toppings/peppers-normal-01.png),
+  background: url(images/toppings/green-peppers-normal-01.png),
   url(images/toppings/onions-normal-01.png),
   url(images/toppings/anchovies-normal-01.png),
   url(images/cheeses/double-01.png),

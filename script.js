@@ -1,7 +1,25 @@
 toppingsList = ["Pepperoni", "Sausage", "Bacon", "Chicken", "Ham", "Anchovies", "Onions", "Spinach", "Green Peppers", "Jalapeno Peppers"]; 
 currentToppingsList = [];
 
+var prebuiltPizza = document.getElementsByClassName("pizzaTab")[0];
+var customizePizza = document.getElementsByClassName("pizzaTab")[1];
+var buttons = document.getElementsByClassName("btn");
+
+for (var i = 0; i < buttons.length; i++) {
+  if (buttons[i].innerHTML == "Add to Order") {
+    buttons[i].addEventListener("click", addToOrder);
+  }
+}
+
+prebuiltPizza.addEventListener("click", prebuiltTab);
+customizePizza.addEventListener("click", customizeTab);
+document.getElementById("selCrust").addEventListener("change", changeCrust);
+document.getElementById("selSize").addEventListener("change", changeSize);
+document.getElementById("selCheese").addEventListener("change", changeSize);
+document.getElementById("selSauce").addEventListener("change", changeSize);
+
 createToppings();
+FillPizza();
 
 function createToppings() {
   var toppingsRow = document.createElement("div");
@@ -21,154 +39,32 @@ function createToppings() {
     topping.appendChild(label);
     toppingsRow.appendChild(topping);
 
-    if(i % 2 == 1) {
+    if(i % 2 == 1 || i == toppingsList.length - 1) {
       document.getElementById("toppingsList").appendChild(toppingsRow);
       toppingsRow = document.createElement("div");
       toppingsRow.className = "toppingsRow";      
     }
   }
 }
-
-document.getElementById("selCrust").addEventListener("change", changeCrust);
-document.getElementById("selSize").addEventListener("change", changeSize);
-document.getElementById("selCheese").addEventListener("change", changeSize);
-document.getElementById("selSauce").addEventListener("change", changeSize);
-
-var prebuiltPizza = document.getElementsByClassName("pizzaTab")[0];
-var customizePizza = document.getElementsByClassName("pizzaTab")[1];
-
-prebuiltPizza.addEventListener("click", prebuiltTab);
-customizePizza.addEventListener("click", customizeTab);
-
-var buttons = document.getElementsByClassName("btn");
-
-for (var i = 0; i < buttons.length; i++) {
-  if (buttons[i].innerHTML == "Add to Order") {
-    buttons[i].addEventListener("click", addToOrder);
-  }
-}
-
-function prebuiltTab(evt) {
-  document.getElementById("endOrder").children[0].innerHTML = "Total: $0.00";
-  document.getElementById("tabTitle").children[0].innerHTML = "Prebuilt Pizzas";
-  document.getElementById("prebuiltHolder").style.display = "flex";
-  document.getElementById("customHolder").style.display = "none";
-  document.getElementById("orderBtn").style.display = "none";
-  document.getElementById("endOrder").children[0].style.display = "none";
-  document.getElementById("pizzaSettings").style.display = "none";  
-}
-
-function customizeTab(evt) {
-  document.getElementById("tabTitle").children[0].innerHTML = "Customize Pizza";
-  document.getElementById("prebuiltHolder").style.display = "none";
-  document.getElementById("customHolder").style.display = "flex";
-  document.getElementById("orderBtn").style.display = "flex";
-  document.getElementById("orderBtn").style.marginLeft = "auto";
-  document.getElementById("pizzaSettings").style.display = "flex";
-  document.getElementById("endOrder").children[0].style.display = "flex";  
-  FillPizza();
-}
-
 function FillPizza() {
   var pizza = document.getElementById('pizzaDrawing');
-  if(pizza.childElementCount == 0){
-    var crust = new Image(250, 250);
-    crust.src = 'images/crusts/regular-01.png';
-    crust.style = "z-index:2; position:absolute; top:0px; left:0px;";
-    crust.className = "imgPizza";
-    crust.id = 'crust';
-    var sauce = new Image(250, 250);
-    sauce.src = 'images/sauces/normal-01.png';
-    sauce.style = "z-index:3; position:absolute;top:0px; left:0px;";
-    sauce.className = "imgPizza";
-    var cheese = new Image(250, 250);
-    cheese.src = 'images/cheeses/normal-01.png';
-    cheese.style = "z-index:4; position:absolute;top:0px; left:0px;";
-    cheese.className = "imgPizza";
-    pizza.appendChild(crust);
-    pizza.appendChild(sauce);
-    pizza.appendChild(cheese);
-  }
-  setPrice();
+  var crust = new Image(250, 250);
+  crust.src = 'images/crusts/regular-01.png';
+  crust.style = "z-index:2; position:absolute; top:0px; left:0px;";
+  crust.className = "imgPizza";
+  crust.id = 'crust';
+  var sauce = new Image(250, 250);
+  sauce.src = 'images/sauces/normal-01.png';
+  sauce.style = "z-index:3; position:absolute;top:0px; left:0px;";
+  sauce.className = "imgPizza";
+  var cheese = new Image(250, 250);
+  cheese.src = 'images/cheeses/normal-01.png';
+  cheese.style = "z-index:4; position:absolute;top:0px; left:0px;";
+  cheese.className = "imgPizza";
+  pizza.appendChild(crust);
+  pizza.appendChild(sauce);
+  pizza.appendChild(cheese);
 }
-function changeCrust(evt){
-  var x = evt.target.value;
-  if(x == 'regular'){
-    document.getElementById('crust').src='images/crusts/regular-01.png';
-  }
-  else if(x == 'thin'){
-    document.getElementById('crust').src='images/crusts/thin-01.png';
-  }
-  else if(x == 'stuffed'){
-    document.getElementById('crust').src='images/crusts/stuffed-01.png';
-  }
-  else if(x == 'garlic'){
-    document.getElementById('crust').src='images/crusts/garlic-01.png';
-  }
-  setPrice();
-}
-function changeSize(evt){
-  var x = evt.target.value;
-  setPrice();
-  // if(x == 'small'){
-  //   document.getElementsByClassName('imgPizza').style = 'height:215px; width: 215px;'
-  // }
-  // else if(x == 'medium'){
-  //   document.getElementsByClassName('imgPizza').style = 'height:230px; width: 230px;'
-  // }
-  // else if(x == 'large'){
-  //   document.getElementsByClassName('imgPizza').style = 'height:250px; width: 250px;'
-  // }
-  // else if(x == 'extra'){
-  //   document.getElementsByClassName('imgPizza').style = 'height:265px; width: 265px;'
-  // }
-}
-function addToOrder(evt) {
-  if(evt.path[1].id == "prebuiltPizza1") {
-    document.getElementById("endOrder").children[0].innerHTML = "Total: $5.00";
-  }
-  else if(evt.path[1].id == "prebuiltPizza2") {
-    document.getElementById("endOrder").children[0].innerHTML = "Total: $6.00";
-  }
-  else if(evt.path[1].id == "prebuiltPizza3") {
-    document.getElementById("endOrder").children[0].innerHTML = "Total: $6.50";
-  }
-  else if(evt.path[1].id == "prebuiltPizza4") {
-    document.getElementById("endOrder").children[0].innerHTML = "Total: $6.00";
-  }
-  else if(evt.path[1].id == "prebuiltPizza5") {
-    document.getElementById("endOrder").children[0].innerHTML = "Total: $5.00";
-  }
-  alert("Thanks for your purchase! That will be " + document.getElementById("endOrder").children[0].innerHTML.substr(7) + "!");
-  for(var i = 0; i < toppingsList.length; i++) {
-    document.getElementsByClassName("topping")[i].children[0].checked = false;
-  }
-  for(var j = 0; j < currentToppingsList.length; j++) {
-    removeFromYourToppings(document.getElementById("yourToppingsList").childNodes[i]);
-  }
-  document.getElementById("selSize").value = "medium";
-  document.getElementById("selCrust").value = "regular";
-  document.getElementById("selCheese").value = "Normal";
-  document.getElementById("selSauce").value = "Normal";
-  drawPizza();
-  prebuiltTab(null);
-}
-
-function addToPizza(evt) {
-  var found = false;
-  for(var i = 0; i < currentToppingsList.length; i++) {
-    if(currentToppingsList[i] == evt.path[1].children[1].innerHTML) {
-      currentToppingsList.splice(i, 1);
-      found = true;
-    }
-  }
-  if(!found) {
-    currentToppingsList.push(evt.path[1].children[1].innerHTML)
-  }
-  drawPizza(found);
-  setPrice();
-}
-
 function setPrice() {
   var toppings = 0;
   var price = 0;
@@ -253,107 +149,37 @@ function setPrice() {
   }
   document.getElementById("endOrder").children[0].innerHTML = "Total: $" +  price.toFixed(2);
 }
-
-function drawPizza(remove) {
-  var pizza = document.getElementById('pizzaDrawing');
-
+function drawPizza(remove, image) {
+  var pizza = document.getElementById('pizzaDrawing');  
   if(!remove) {
-
+    var img = new Image(250, 250);
+    img.className = 'imgPizza';
+    img.src = "images/toppings/" + currentToppingsList[currentToppingsList.length - 1].split(' ').join('-').toLowerCase() + "-normal-01.png";
+    img.id = currentToppingsList[currentToppingsList.length - 1].split(' ').join('');
+    img.style = "z-index:5; position:absolute; top:0px; left:0px;";
+    pizza.appendChild(img);
   }
   else {
-    
+    pizza.removeChild(document.getElementById(image));
   }
 
-  // while (pizza.hasChildNodes()) { 
-  //   pizza.removeChild(pizza.lastChild);
-  // }
-  // FillPizza();
-  // var counter = 0;
-  // for (i = 0; i < currentToppings.length; i++) {
-  //   if (currentToppings[i] != "") {
-  //     var img = new Image(250, 250);
-  //     img.className = 'imgPizza';
-  //     switch (i) {
-  //       case 0:
-  //         img.src = "images/toppings/pepperoni-normal-01.png";
-  //         img.id = "Pepperoni";
-  //         counter++;
-  //         break;
-  //       case 1:
-  //         img.src = "images/toppings/sausage-normal-01.png";
-  //         img.id = "Sausage";
-  //         counter++;
-  //         break;
-  //       case 2:
-  //         img.src = "images/toppings/bacon-normal-01.png";
-  //         img.id = "Bacon";
-  //         counter++;
-  //         break;
-  //       case 3:
-  //         img.src = "images/toppings/chicken-normal-01.png";
-  //         img.id = "Chicken";
-  //         counter++;
-  //         break;
-  //       case 4:
-  //         img.src = "images/toppings/ham-normal-01.png";
-  //         img.id = "Ham";
-  //         counter++;
-  //         break;
-  //       case 5:
-  //         img.src = "images/toppings/anchovies-normal-01.png";
-  //         img.id = "Anchovies";
-  //         counter++;
-  //         break;
-  //       case 6:
-  //         img.src = "images/toppings/onions-normal-01.png";
-  //         img.id = "Onions";
-  //         counter++;
-  //         break;
-  //       case 7:
-  //         img.src = "images/toppings/spinach-normal-01.png";
-  //         img.id = "Spinach";
-  //         counter++;
-  //         break;
-  //       case 8:
-  //         img.src = "images/toppings/peppers-normal-01.png";
-  //         img.id = "Peppers";
-  //         counter++;
-  //         break;
-  //       case 9:
-  //         img.src = "images/toppings/jalapeno-normal-01.png";
-  //         img.id = "Jalapenos";
-  //         counter++;
-  //         break;
-  //     }
-  //     img.style = "z-index:5; position:absolute; top:0px; left:0px;";
-  //     pizza.appendChild(img);
-  //   }
-    
-  //   if (counter >= 5) {
-  //     document.getElementById('lblBonus').style = "visibility:visible";
-  //   }
-  //   else{
-  //     document.getElementById('lblBonus').style = "visibility:hidden";
-  //   }
-  //   if (counter > 0){
-  //     document.getElementById('lblToppings').style = "visibility:visible";
-  //     document.getElementById('yourToppingsList').style = "visibility:visible";
-  //   }
-  //   else{
-  //     document.getElementById('lblToppings').style = "visibility:hidden";
-  //     document.getElementById('yourToppingsList').style = "visibility:hidden";
-  //   }
-  //  
-  // }
+  if (currentToppingsList.length >= 5) {
+    document.getElementById('lblBonus').style = "visibility:visible";
+  }
+  else{
+    document.getElementById('lblBonus').style = "visibility:hidden";
+  }
+  if (currentToppingsList.length > 0){
+    document.getElementById('lblToppings').style = "visibility:visible";
+    document.getElementById('yourToppingsList').style = "visibility:visible";
+  }
+  else{
+    document.getElementById('lblToppings').style = "visibility:hidden";
+    document.getElementById('yourToppingsList').style = "visibility:hidden";
+  }
   updateToppingList();
 }
-
-var selectors;
-var values;
-
 function updateToppingList(){
-  selectors = [];
-  values = [];
   var list = document.getElementById('yourToppingsList');
   if(list.children.length != 0) {
     if(currentToppingsList.length > list.children.length) {
@@ -376,7 +202,6 @@ function updateToppingList(){
     addToYourToppings(currentToppingsList[0]);
   }
 }
-
 function addToYourToppings(toAdd) {
   //should look cleaner, but oh well
   var d = document.createElement("div");
@@ -394,9 +219,6 @@ function addToYourToppings(toAdd) {
     el.value = opt;
     s.appendChild(el);
   }
-  selectors[selectors.length] = s;
-  values[values.length] = s.value;
-  s.addEventListener('change', modToppings);
   var full = document.createElement('button');
   var left = document.createElement('button');
   var right = document.createElement('button');
@@ -405,9 +227,9 @@ function addToYourToppings(toAdd) {
   full.className = 'btnFullPizza';
   left.className = 'btnLeftPizza';
   right.className = 'btnRightPizza';
-  full.id = l.innerHTML + 'full';
-  left.id = l.innerHTML + 'left';
-  right.id = l.innerHTML + 'right';
+  full.id = toAdd.split(' ').join('') + 'full';
+  left.id = toAdd.split(' ').join('') + 'left';
+  right.id = toAdd.split(' ').join('') + 'right';
   full.style = 'background:#1286AA';
   full.addEventListener('click', halves);
   left.addEventListener('click', halves);
@@ -419,203 +241,137 @@ function addToYourToppings(toAdd) {
   d.appendChild(right);
   document.getElementById('yourToppingsList').appendChild(d);
 }
-
 function removeFromYourToppings(toRemove) {
   document.getElementById('yourToppingsList').removeChild(toRemove);
 }
+function resetPizza() {
+  var pizza = document.getElementById('pizzaDrawing');  
+  while(pizza.hasChildNodes()) {
+    pizza.removeChild(pizza.lastChild)
+  }
+}
 
-function modToppings(evt){
-  values[values.length] = evt.target.value;
+function prebuiltTab(evt) {
+  document.getElementById("endOrder").children[0].innerHTML = "Total: $0.00";
+  document.getElementById("tabTitle").children[0].innerHTML = "Prebuilt Pizzas";
+  document.getElementById("prebuiltHolder").style.display = "flex";
+  document.getElementById("customHolder").style.display = "none";
+  document.getElementById("orderBtn").style.display = "none";
+  document.getElementById("endOrder").children[0].style.display = "none";
+  document.getElementById("pizzaSettings").style.display = "none";  
+}
+function customizeTab(evt) {
+  document.getElementById("tabTitle").children[0].innerHTML = "Customize Pizza";
+  document.getElementById("prebuiltHolder").style.display = "none";
+  document.getElementById("customHolder").style.display = "flex";
+  document.getElementById("orderBtn").style.display = "flex";
+  document.getElementById("orderBtn").style.marginLeft = "auto";
+  document.getElementById("pizzaSettings").style.display = "flex";
+  document.getElementById("endOrder").children[0].style.display = "flex";  
+}
+function changeCrust(evt){
+  var x = evt.target.value;
+  if(x == 'regular'){
+    document.getElementById('crust').src='images/crusts/regular-01.png';
+  }
+  else if(x == 'thin'){
+    document.getElementById('crust').src='images/crusts/thin-01.png';
+  }
+  else if(x == 'stuffed'){
+    document.getElementById('crust').src='images/crusts/stuffed-01.png';
+  }
+  else if(x == 'garlic'){
+    document.getElementById('crust').src='images/crusts/garlic-01.png';
+  }
+  setPrice();
+}
+function changeSize(evt){
+  var x = evt.target.value;
+  setPrice();
+  // if(x == 'small'){
+  //   document.getElementsByClassName('imgPizza').style = 'height:215px; width: 215px;'
+  // }
+  // else if(x == 'medium'){
+  //   document.getElementsByClassName('imgPizza').style = 'height:230px; width: 230px;'
+  // }
+  // else if(x == 'large'){
+    //   document.getElementsByClassName('imgPizza').style = 'height:250px; width: 250px;'
+  // }
+  // else if(x == 'extra'){
+    //   document.getElementsByClassName('imgPizza').style = 'height:265px; width: 265px;'
+    // }
+}
+function addToPizza(evt) {
+  var found = false;
+  var removed = "";
+  for(var i = 0; i < currentToppingsList.length; i++) {
+    if(currentToppingsList[i] == evt.path[1].children[1].innerHTML) {
+      found = true;
+      removed = currentToppingsList[i].split(' ').join('');
+      currentToppingsList.splice(i, 1);
+    }
+  }
+  if(!found) {
+    currentToppingsList.push(evt.path[1].children[1].innerHTML)
+  }
+  drawPizza(found, removed);
+  setPrice();
 }
 function halves(evt){
   var b = evt.target;
-  if(b.id == "Pepperonifull"){
-    document.getElementById("Pepperoni").src = 'images/toppings/pepperoni-normal-01.png';
-    b.style = "background:#1286AA;";
-    document.getElementById('Pepperonileft').style = "background:#FFF;";
-    document.getElementById('Pepperoniright').style = "background:#FFF;";
+  for(var i = 0; i < toppingsList.length; i++) {
+    if(b.id == toppingsList[i].split(' ').join('') + "full") {
+      document.getElementById(toppingsList[i].split(' ').join('')).src = 'images/toppings/' + toppingsList[i].split(' ').join('-').toLowerCase()
+      + '-normal-01.png';
+      document.getElementById(toppingsList[i].split(' ').join('') + 'left').style = "background:#FFF;";
+      document.getElementById(toppingsList[i].split(' ').join('') + 'right').style = "background:#FFF;";
+      b.style = "background:#1286AA;";
+    }
+    else if(b.id == toppingsList[i].split(' ').join('') + "left") {
+      document.getElementById(toppingsList[i].split(' ').join('')).src = 'images/toppings/' + toppingsList[i].split(' ').join('-').toLowerCase()
+      + '-left-01.png';
+      document.getElementById(toppingsList[i].split(' ').join('') + 'full').style = "background:#FFF;";
+      document.getElementById(toppingsList[i].split(' ').join('') + 'right').style = "background:#FFF;";
+      b.style = "background:#1286AA;";
+    }
+    else if(b.id == toppingsList[i].split(' ').join('') + "right") {
+      document.getElementById(toppingsList[i].split(' ').join('')).src = 'images/toppings/' + toppingsList[i].split(' ').join('-').toLowerCase()
+      + '-right-01.png';
+      document.getElementById(toppingsList[i].split(' ').join('') + 'left').style = "background:#FFF;";
+      document.getElementById(toppingsList[i].split(' ').join('') + 'full').style = "background:#FFF;";
+      b.style = "background:#1286AA;";
+    }
   }
-  else if(b.id == "Pepperonileft"){
-    document.getElementById("Pepperoni").src = 'images/toppings/pepperoni-left-01.png';
-    b.style = "background:#1286AA;";
-    document.getElementById('Pepperonifull').style = "background:#FFF;";
-    document.getElementById('Pepperoniright').style = "background:#FFF;";
+}
+function addToOrder(evt) {
+  if(evt.path[1].id == "prebuiltPizza1") {
+    document.getElementById("endOrder").children[0].innerHTML = "Total: $5.00";
   }
-  else if(b.id == "Pepperoniright"){
-    document.getElementById("Pepperoni").src = 'images/toppings/pepperoni-right-01.png';
-    b.style = "background:#1286AA;";
-    document.getElementById('Pepperonileft').style = "background:#FFF;";
-    document.getElementById('Pepperonifull').style = "background:#FFF;";
+  else if(evt.path[1].id == "prebuiltPizza2") {
+    document.getElementById("endOrder").children[0].innerHTML = "Total: $6.00";
   }
-  //////////////////////////
-  else if(b.id == "Sausagefull"){
-    document.getElementById("Sausage").src = 'images/toppings/sausage-normal-01.png';
-    b.style = "background:#1286AA;";
-    document.getElementById('Sausageleft').style = "background:#FFF;";
-    document.getElementById('Sausageright').style = "background:#FFF;";
+  else if(evt.path[1].id == "prebuiltPizza3") {
+    document.getElementById("endOrder").children[0].innerHTML = "Total: $6.50";
   }
-  else if(b.id == "Sausageleft"){
-    document.getElementById("Sausage").src = 'images/toppings/sausage-left-01.png';
-    b.style = "background:#1286AA;";
-    document.getElementById('Sausagefull').style = "background:#FFF;";
-    document.getElementById('Sausageright').style = "background:#FFF;";
+  else if(evt.path[1].id == "prebuiltPizza4") {
+    document.getElementById("endOrder").children[0].innerHTML = "Total: $6.00";
   }
-  else if(b.id == "Sausageright"){
-    document.getElementById("Sausage").src = 'images/toppings/sausage-right-01.png';
-    b.style = "background:#1286AA;";
-    document.getElementById('Sausageleft').style = "background:#FFF;";
-    document.getElementById('Sausagefull').style = "background:#FFF;";
+  else if(evt.path[1].id == "prebuiltPizza5") {
+    document.getElementById("endOrder").children[0].innerHTML = "Total: $5.00";
   }
-  ///////////////////////////
-  else if(b.id == "Baconfull"){
-    document.getElementById("Bacon").src = 'images/toppings/bacon-normal-01.png';
-    b.style = "background:#1286AA;";
-    document.getElementById('Baconleft').style = "background:#FFF;";
-    document.getElementById('Baconright').style = "background:#FFF;";
+  alert("Thanks for your purchase! That will be " + document.getElementById("endOrder").children[0].innerHTML.substr(7) + "!");
+
+  for(var i = 0; i < toppingsList.length; i++) {
+    document.getElementsByClassName("topping")[i].children[0].checked = false;
   }
-  else if(b.id == "Baconleft"){
-    document.getElementById("Bacon").src = 'images/toppings/bacon-left-01.png';
-    b.style = "background:#1286AA;";
-    document.getElementById('Baconfull').style = "background:#FFF;";
-    document.getElementById('Baconright').style = "background:#FFF;";
+  for(var j = 0; j < currentToppingsList.length; j++) {
+    removeFromYourToppings(document.getElementById("yourToppingsList").childNodes[i]);
   }
-  else if(b.id == "Baconright"){
-    document.getElementById("Bacon").src = 'images/toppings/bacon-right-01.png';
-    b.style = "background:#1286AA;";
-    document.getElementById('Baconleft').style = "background:#FFF;";
-    document.getElementById('Baconfull').style = "background:#FFF;";
-  }
-  ///////////////////////////
-  else if(b.id == "Chickenfull"){
-    document.getElementById("Chicken").src = 'images/toppings/chicken-normal-01.png';
-    b.style = "background:#1286AA;";
-    document.getElementById('Chickenleft').style = "background:#FFF;";
-    document.getElementById('Chickenright').style = "background:#FFF;";
-  }
-  else if(b.id == "Chickenleft"){
-    document.getElementById("Chicken").src = 'images/toppings/chicken-left-01.png';
-    b.style = "background:#1286AA;";
-    document.getElementById('Chickenfull').style = "background:#FFF;";
-    document.getElementById('Chickenright').style = "background:#FFF;";
-  }
-  else if(b.id == "Chickenright"){
-    document.getElementById("Chicken").src = 'images/toppings/chicken-right-01.png';
-    b.style = "background:#1286AA;";
-    document.getElementById('Chickenleft').style = "background:#FFF;";
-    document.getElementById('Chickenfull').style = "background:#FFF;";
-  }
-  ///////////////////////////
-  else if(b.id == "Hamfull"){
-    document.getElementById("Ham").src = 'images/toppings/ham-normal-01.png';
-    b.style = "background:#1286AA;";
-    document.getElementById('Hamleft').style = "background:#FFF;";
-    document.getElementById('Hamright').style = "background:#FFF;";
-  }
-  else if(b.id == "Hamleft"){
-    document.getElementById("Ham").src = 'images/toppings/ham-left-01.png';
-    b.style = "background:#1286AA;";
-    document.getElementById('Hamfull').style = "background:#FFF;";
-    document.getElementById('Hamright').style = "background:#FFF;";
-  }
-  else if(b.id == "Hamright"){
-    document.getElementById("Ham").src = 'images/toppings/ham-right-01.png';
-    b.style = "background:#1286AA;";
-    document.getElementById('Hamleft').style = "background:#FFF;";
-    document.getElementById('Hamfull').style = "background:#FFF;";
-  }
-  ////////////////////////
-  else if(b.id == "Anchoviesfull"){
-    document.getElementById("Anchovies").src = 'images/toppings/anchovies-normal-01.png';
-    b.style = "background:#1286AA;";
-    document.getElementById('Anchoviesleft').style = "background:#FFF;";
-    document.getElementById('Anchoviesright').style = "background:#FFF;";
-  }
-  else if(b.id == "Anchoviesleft"){
-    document.getElementById("Anchovies").src = 'images/toppings/anchovies-left-01.png';
-    b.style = "background:#1286AA;";
-    document.getElementById('Anchoviesfull').style = "background:#FFF;";
-    document.getElementById('Anchoviesright').style = "background:#FFF;";
-  }
-  else if(b.id == "Anchoviesright"){
-    document.getElementById("Anchovies").src = 'images/toppings/anchovies-right-01.png';
-    b.style = "background:#1286AA;";
-    document.getElementById('Anchoviesleft').style = "background:#FFF;";
-    document.getElementById('Anchoviesfull').style = "background:#FFF;";
-  }
-  ////////////////////////
-  else if(b.id == "Onionsfull"){
-    document.getElementById("Onions").src = 'images/toppings/onions-normal-01.png';
-    b.style = "background:#1286AA;";
-    document.getElementById('Onionsleft').style = "background:#FFF;";
-    document.getElementById('Onionsright').style = "background:#FFF;";
-  }
-  else if(b.id == "Onionsleft"){
-    document.getElementById("Onions").src = 'images/toppings/onions-left-01.png';
-    b.style = "background:#1286AA;";
-    document.getElementById('Onionsfull').style = "background:#FFF;";
-    document.getElementById('Onionsright').style = "background:#FFF;";
-  }
-  else if(b.id == "Onionsright"){
-    document.getElementById("Onions").src = 'images/toppings/onions-right-01.png';
-    b.style = "background:#1286AA;";
-    document.getElementById('Onionsleft').style = "background:#FFF;";
-    document.getElementById('Onionsfull').style = "background:#FFF;";
-  }
-  ////////////////////////
-  else if(b.id == "Spinachfull"){
-    document.getElementById("Spinach").src = 'images/toppings/spinach-normal-01.png';
-    b.style = "background:#1286AA;";
-    document.getElementById('Spinachleft').style = "background:#FFF;";
-    document.getElementById('Spinachright').style = "background:#FFF;";
-  }
-  else if(b.id == "Spinachleft"){
-    document.getElementById("Spinach").src = 'images/toppings/spinach-left-01.png';
-    b.style = "background:#1286AA;";
-    document.getElementById('Spinachfull').style = "background:#FFF;";
-    document.getElementById('Spinachright').style = "background:#FFF;";
-  }
-  else if(b.id == "Spinachright"){
-    document.getElementById("Spinach").src = 'images/toppings/spinach-right-01.png';
-    b.style = "background:#1286AA;";
-    document.getElementById('Spinachleft').style = "background:#FFF;";
-    document.getElementById('Spinachfull').style = "background:#FFF;";
-  }
-  ////////////////////////
-  else if(b.id == "Green Peppersfull"){
-    document.getElementById("Peppers").src = 'images/toppings/peppers-normal-01.png';
-    b.style = "background:#1286AA;";
-    document.getElementById('Green Peppersleft').style = "background:#FFF;";
-    document.getElementById('Green Peppersright').style = "background:#FFF;";
-  }
-  else if(b.id == "Green Peppersleft"){
-    document.getElementById("Peppers").src = 'images/toppings/peppers-left-01.png';
-    b.style = "background:#1286AA;";
-    document.getElementById('Green Peppersfull').style = "background:#FFF;";
-    document.getElementById('Green Peppersright').style = "background:#FFF;";
-  }
-  else if(b.id == "Green Peppersright"){
-    document.getElementById("Peppers").src = 'images/toppings/peppers-right-01.png';
-    b.style = "background:#1286AA;";
-    document.getElementById('Green Peppersleft').style = "background:#FFF;";
-    document.getElementById('Green Peppersfull').style = "background:#FFF;";
-  }
-  ////////////////////////
-  else if(b.id == "Jalapeno Peppersfull"){
-    document.getElementById("Jalapenos").src = 'images/toppings/jalapeno-normal-01.png';
-    b.style = "background:#1286AA;";
-    document.getElementById('Jalapeno Peppersleft').style = "background:#FFF;";
-    document.getElementById('Jalapeno Peppersright').style = "background:#FFF;";
-  }
-  else if(b.id == "Jalapeno Peppersleft"){
-    document.getElementById("Jalapenos").src = 'images/toppings/jalapeno-left-01.png';
-    b.style = "background:#1286AA;";
-    document.getElementById('Jalapeno Peppersfull').style = "background:#FFF;";
-    document.getElementById('Jalapeno Peppersright').style = "background:#FFF;";
-  }
-  else if(b.id == "Jalapeno Peppersright"){
-    document.getElementById("Jalapenos").src = 'images/toppings/jalapeno-right-01.png';
-    b.style = "background:#1286AA;";
-    document.getElementById('Jalapeno Peppersleft').style = "background:#FFF;";
-    document.getElementById('Jalapeno Peppersfull').style = "background:#FFF;";
-  }
+  document.getElementById("selSize").value = "medium";
+  document.getElementById("selCrust").value = "regular";
+  document.getElementById("selCheese").value = "Normal";
+  document.getElementById("selSauce").value = "Normal";
+  resetPizza();
+  
+  prebuiltTab(null);
 }
