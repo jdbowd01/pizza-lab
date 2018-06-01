@@ -1,8 +1,9 @@
-.bold {
-  font-weight: bold;
-}
 html{
   font-family: 'Roboto', sans-serif;
+}
+
+.bold {
+  font-weight: bold;
 }
 .btn {
   cursor: pointer;
@@ -64,7 +65,7 @@ html{
   margin: 3vw auto;
 }
 .topping{
-  width: 180px;
+  width: 120px;
 }
 .box{
   display: flex;
@@ -304,6 +305,7 @@ html{
     border-top-right-radius: 0px;  
     border-right: 1px solid #555;    
   }
+
   #orderingArea {
     flex-direction: column;
   }

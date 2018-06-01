@@ -1,5 +1,7 @@
-toppingsList = ["Pepperoni", "Sausage", "Bacon", "Chicken", "Ham", "Anchovies", "Onions", "Spinach", "Green Peppers", "Jalapeno Peppers"]; 
-currentToppingsList = [];
+var toppingsList = ["Pepperoni", "Sausage", "Bacon", "Chicken", "Ham", "Anchovies", "Onions", "Spinach", "Green Peppers", "Jalapeno Peppers"]; 
+var currentToppingsList = [];
+var pizzaSize = 250;
+var mobile = 0;
 
 var prebuiltPizza = document.getElementsByClassName("pizzaTab")[0];
 var customizePizza = document.getElementsByClassName("pizzaTab")[1];
@@ -17,6 +19,7 @@ document.getElementById("selCrust").addEventListener("change", changeCrust);
 document.getElementById("selSize").addEventListener("change", changeSize);
 document.getElementById("selCheese").addEventListener("change", changeSize);
 document.getElementById("selSauce").addEventListener("change", changeSize);
+window.onresize = changeMobile;
 
 createToppings();
 FillPizza();
@@ -48,16 +51,16 @@ function createToppings() {
 }
 function FillPizza() {
   var pizza = document.getElementById('pizzaDrawing');
-  var crust = new Image(250, 250);
+  var crust = new Image(pizzaSize, pizzaSize);
   crust.src = 'images/crusts/regular-01.png';
   crust.style = "z-index:2; position:absolute; top:0px; left:0px;";
   crust.className = "imgPizza";
   crust.id = 'crust';
-  var sauce = new Image(250, 250);
+  var sauce = new Image(pizzaSize, pizzaSize);
   sauce.src = 'images/sauces/normal-01.png';
   sauce.style = "z-index:3; position:absolute;top:0px; left:0px;";
   sauce.className = "imgPizza";
-  var cheese = new Image(250, 250);
+  var cheese = new Image(pizzaSize, pizzaSize);
   cheese.src = 'images/cheeses/normal-01.png';
   cheese.style = "z-index:4; position:absolute;top:0px; left:0px;";
   cheese.className = "imgPizza";
@@ -152,7 +155,7 @@ function setPrice() {
 function drawPizza(remove, image) {
   var pizza = document.getElementById('pizzaDrawing');  
   if(!remove) {
-    var img = new Image(250, 250);
+    var img = new Image(pizzaSize, pizzaSize);
     img.className = 'imgPizza';
     img.src = "images/toppings/" + currentToppingsList[currentToppingsList.length - 1].split(' ').join('-').toLowerCase() + "-normal-01.png";
     img.id = currentToppingsList[currentToppingsList.length - 1].split(' ').join('');
@@ -269,6 +272,20 @@ function customizeTab(evt) {
   document.getElementById("pizzaSettings").style.display = "flex";
   document.getElementById("endOrder").children[0].style.display = "flex";  
 }
+function changeMobile(evt) {
+  if(window.offsetWidth < 700) {
+    if(mobile == 0) {
+      mobile = 50;
+      changeSize(null);
+    }
+  }
+  else {
+    if(mobile == 50) {
+      mobile = 0;
+      changeSize(null);      
+    }
+  }
+}
 function changeCrust(evt){
   var x = evt.target.value;
   if(x == 'regular'){
@@ -286,20 +303,34 @@ function changeCrust(evt){
   setPrice();
 }
 function changeSize(evt){
-  var x = evt.target.value;
+  var x = document.getElementById("selSize").value;
+  if(x == 'small') {
+    if(!(window.offsetWidth < 700)) {
+      pizzaSize = 225 - mobile;
+    }
+  }
+  else if(x == 'medium') {
+    if(!(window.offsetWidth < 700)) {
+      pizzaSize = 250 - mobile;
+    }
+  }
+  else if(x == 'large') {
+    if(!(window.offsetWidth < 700)) {
+      pizzaSize = 275 - mobile;
+    }
+  }
+  else if(x == 'extra') {
+    if(!(window.offsetWidth < 700)) {
+      pizzaSize = 300 - mobile;
+    }
+  }
+  document.getElementById("pizzaDrawing").style.width = pizzaSize + "px";
+  document.getElementById("pizzaDrawing").style.height = pizzaSize + "px";
+  for(var i = 0; i < document.getElementById("pizzaDrawing").children.length; i++) {
+    document.getElementById("pizzaDrawing").children[i].width = pizzaSize;
+    document.getElementById("pizzaDrawing").children[i].height = pizzaSize;
+  }
   setPrice();
-  // if(x == 'small'){
-  //   document.getElementsByClassName('imgPizza').style = 'height:215px; width: 215px;'
-  // }
-  // else if(x == 'medium'){
-  //   document.getElementsByClassName('imgPizza').style = 'height:230px; width: 230px;'
-  // }
-  // else if(x == 'large'){
-    //   document.getElementsByClassName('imgPizza').style = 'height:250px; width: 250px;'
-  // }
-  // else if(x == 'extra'){
-    //   document.getElementsByClassName('imgPizza').style = 'height:265px; width: 265px;'
-    // }
 }
 function addToPizza(evt) {
   var found = false;
