@@ -1,28 +1,267 @@
 var toppingsList = ["Pepperoni", "Sausage", "Bacon", "Chicken", "Ham", "Anchovies", "Onions", "Spinach", "Green Peppers", "Jalapeno Peppers"]; 
 var currentToppingsList = [];
+var pizzaPresets = [
+  {
+    text: "Meat Lover's",
+    price: "$5.00",
+    desc: "A plain cheese pizza topped with sausage, pepperoni, and ham."
+  },
+  {
+    text: "Vegetarian",
+    price: "$6.00",
+    desc: "Garlic crusted double cheese pizza with light sauce, topped with onions, peppers, and spinach."
+  },
+  {
+    text: "Spicy Chicken Bacon",
+    price: "$6.50",
+    desc: "Stuffed crust pizza with double cheese, topped with chicken and bacon, with a few jalapenos."
+  },
+  {
+    text: "Slightly Less Supreme",
+    price: "$6.00",
+    desc: "A plain cheese pizza topped with sausage, pepperoni, peppers, and onions."
+  },
+  {
+    text: "Anchovy Ahoy",
+    price: "$5.00",
+    desc: "A thin crusted double cheese pizza with anchovies, onions, and peppers finishing the dish off."
+  },
+];
 var picWidth = "80%";
 var picPadding = "0% 10%";
 
-var prebuiltPizza = document.getElementsByClassName("pizzaTab")[0];
-var customizePizza = document.getElementsByClassName("pizzaTab")[1];
-var buttons = document.getElementsByClassName("btn");
-
-for (var i = 0; i < buttons.length; i++) {
-  if (buttons[i].innerHTML == "Add to Order") {
-    buttons[i].addEventListener("click", addToOrder);
-  }
-}
-
-prebuiltPizza.addEventListener("click", prebuiltTab);
-customizePizza.addEventListener("click", customizeTab);
-document.getElementById("selCrust").addEventListener("change", changeCrust);
-document.getElementById("selSize").addEventListener("change", changeSize);
-document.getElementById("selCheese").addEventListener("change", changeSize);
-document.getElementById("selSauce").addEventListener("change", changeSize);
-
+createHTML();
+EditHTML();
 createToppings();
 FillPizza();
 
+function createHTML() {
+  var pizza = document.getElementById("pizza");
+  var titleBar = document.createElement("h1");
+  titleBar.innerHTML = "The Pizza Donut";
+  titleBar.id = "titleBar";
+  var mainTab1 = document.createElement("p");
+  mainTab1.className = "mainTab";
+  mainTab1.innerHTML = "Prebuilt Pizzas";
+  var pizzaTab1 = document.createElement("div");
+  pizzaTab1.className = "pizzaTab";  
+  var orderingTabs = document.createElement("div");
+  orderingTabs.id = "orderingTabs";
+  var lblCustom = document.createElement("p");
+  lblCustom.className = "mainTab";
+  lblCustom.id = "lblCustom";
+  lblCustom.innerHTML = "Customize";
+  var pizzaTab2 = document.createElement("div");
+  pizzaTab2.className = "pizzaTab";
+  var pSize = document.createElement("p");
+  pSize.innerHTML = "Size";
+  var sizeSetting = document.createElement("div");
+  sizeSetting.id = "sizeSetting";
+  sizeSetting.className = "pizzaSetting";
+  var optionSmall = document.createElement("option");
+  optionSmall.value = "small";
+  optionSmall.innerHTML = "Small";
+  var optionMedium = document.createElement("option");
+  optionMedium.value = "medium";
+  optionMedium.innerHTML = "Medium";
+  optionMedium.selected = "selected";
+  var optionLarge = document.createElement("option");
+  optionLarge.value = "large";
+  optionLarge.innerHTML = "Large";
+  var optionExtra = document.createElement("option");
+  optionExtra.value = "extra";
+  optionExtra.innerHTML = "Extra";
+  var selSize = document.createElement("select");
+  selSize.id = "selSize";
+  selSize.autocomplete = "off";
+  var pCrust = document.createElement("p");
+  pCrust.innerHTML = "Crust";
+  var crustSetting = document.createElement("div");
+  crustSetting.id = "crustSetting";
+  crustSetting.className = "pizzaSetting";
+  var optionRegular = document.createElement("option");
+  optionRegular.value = "regular";
+  optionRegular.innerHTML = "Regular";
+  var optionThin = document.createElement("option");
+  optionThin.value = "thin";
+  optionThin.innerHTML = "Thin";
+  var optionStuffed = document.createElement("option");
+  optionStuffed.value = "stuffed";
+  optionStuffed.innerHTML = "Stuffed";
+  var optionGarlic = document.createElement("option");
+  optionGarlic.value = "garlic";
+  optionGarlic.innerHTML = "Garlic";
+  var selCrust = document.createElement("select");
+  selCrust.id = "selCrust";
+  selCrust.autocomplete = "off";
+  var pCheese = document.createElement("p");
+  pCheese.innerHTML = "Cheese";
+  var cheeseSetting = document.createElement("div");
+  cheeseSetting.id = "cheeseSetting";
+  cheeseSetting.className = "pizzaSetting";
+  var optionNormal = document.createElement("option");
+  optionNormal.innerHTML = "Normal";
+  var optionLight = document.createElement("option");
+  optionLight.innerHTML = "Light";
+  var optionDouble = document.createElement("option");
+  optionDouble.innerHTML = "Double";
+  var selCheese = document.createElement("select");
+  selCheese.id = "selCheese";
+  selCheese.autocomplete = "off";
+  var pSauce = document.createElement("p");
+  pSauce.innerHTML = "Sauce";
+  var sauceSetting = document.createElement("div");
+  sauceSetting.id = "sauceSetting";
+  sauceSetting.className = "pizzaSetting";
+  var optionNormal1 = document.createElement("option");
+  optionNormal1.innerHTML = "Normal";
+  var optionLight1 = document.createElement("option");
+  optionLight1.innerHTML = "Light";
+  var optionDouble1 = document.createElement("option");
+  optionDouble1.innerHTML = "Double";
+  var selSauce = document.createElement("select");
+  selSauce.id = "selSauce";
+  var pizzaSettings = document.createElement("section");
+  pizzaSettings.id = "pizzaSettings";
+  var orderingArea =  document.createElement("div");
+  orderingArea.id = "orderingArea";
+  var orderDesc = document.createElement("div");
+  orderDesc.id = "orderDesc";
+  var tabTitle = document.createElement("h3");
+  tabTitle.id = "tabTitle";
+  var pPrebuiltPizzas = document.createElement("p");
+  pPrebuiltPizzas.innerHTML = "Prebuilt Pizzas";
+  var prebuiltHolder = document.createElement("div");
+  prebuiltHolder.id = "prebuiltHolder";
+  for(var i = 0; i < 5; i ++) {
+    var prebuiltPizza = document.createElement("div");
+    prebuiltPizza.id = "prebuiltPizza" + (i+1);
+    prebuiltPizza.className = "prebuiltPizza";
+    var prebuiltPizzaPicture = document.createElement("img");
+    prebuiltPizzaPicture.className = "prebuiltPizzaPicture";
+    var pText = document.createElement("p");
+    pText.className = "bold";
+    pText.innerHTML = pizzaPresets[i].text;
+    var pPrice = document.createElement("p");
+    pPrice.innerHTML = pizzaPresets[i].price;
+    var addOrder = document.createElement("div");
+    addOrder.className = "btn";
+    addOrder.innerHTML = "Add to Order";
+    var prebuiltDesc = document.createElement("p");
+    prebuiltDesc.className = "prebuiltPizzaDesc";
+    prebuiltDesc.innerHTML = pizzaPresets[i].desc;
+    prebuiltPizza.appendChild(prebuiltPizzaPicture);
+    prebuiltPizza.appendChild(pText);
+    prebuiltPizza.appendChild(pPrice);
+    prebuiltPizza.appendChild(addOrder);
+    prebuiltPizza.appendChild(prebuiltDesc);
+    prebuiltHolder.appendChild(prebuiltPizza);
+  }
+  var customHolder = document.createElement("div");
+  customHolder.id = "customHolder";
+  var pizzaDisplay = document.createElement("div");
+  pizzaDisplay.id = "pizzaDisplay";
+  pizzaDisplay.className = "box";
+  var lblBonus = document.createElement("label");
+  lblBonus.id = "lblBonus";
+  lblBonus.innerHTML = "5 Toppings Deal!";
+  var pizzaDrawing = document.createElement("div");
+  pizzaDrawing.id = "pizzaDrawing";
+  var yourToppings = document.createElement("div");
+  yourToppings.id = "yourToppings";
+  var lblToppings = document.createElement("label");
+  lblToppings.id = "lblToppings";
+  lblToppings.innerHTML = "Your Toppings";
+  var yourToppingsList = document.createElement("div");
+  yourToppingsList.id = "yourToppingsList";
+  var toppingsDisplay = document.createElement("div");
+  toppingsDisplay.id = "toppingsDisplay";
+  toppingsDisplay.className = "box";
+  var labelToppings = document.createElement("label");
+  labelToppings.innerHTML = "Toppings";
+  var toppingsListCreate = document.createElement("div");
+  toppingsListCreate.id = "toppingsList";
+  var endOrder = document.createElement("div");
+  endOrder.id = "endOrder";
+  var pTotal = document.createElement("p");
+  pTotal.className = "bold";
+  pTotal.innerHTML = "Total: $0.00";
+  var orderBtn = document.createElement("div");
+  orderBtn.id = "orderBtn";
+  orderBtn.className = "btn";
+  orderBtn.innerHTML = "Add to Order";
+
+  pizza.appendChild(titleBar);
+  pizzaTab1.appendChild(mainTab1);
+  orderingTabs.appendChild(pizzaTab1);
+  pizzaTab2.appendChild(lblCustom);
+  selSize.appendChild(optionSmall);
+  selSize.appendChild(optionMedium);
+  selSize.appendChild(optionLarge);
+  selSize.appendChild(optionExtra);
+  sizeSetting.appendChild(pSize);
+  sizeSetting.appendChild(selSize);
+  selCrust.appendChild(optionRegular);
+  selCrust.appendChild(optionThin);
+  selCrust.appendChild(optionStuffed);
+  selCrust.appendChild(optionGarlic);
+  crustSetting.appendChild(pCrust);
+  crustSetting.appendChild(selCrust);
+  selCheese.appendChild(optionNormal);
+  selCheese.appendChild(optionLight);
+  selCheese.appendChild(optionDouble);
+  cheeseSetting.appendChild(pCheese);
+  cheeseSetting.appendChild(selCheese);
+  selSauce.appendChild(optionNormal1);
+  selSauce.appendChild(optionLight1);
+  selSauce.appendChild(optionDouble1);
+  sauceSetting.appendChild(pSauce);
+  sauceSetting.appendChild(selSauce);
+  pizzaSettings.appendChild(sizeSetting);
+  pizzaSettings.appendChild(crustSetting);
+  pizzaSettings.appendChild(cheeseSetting);
+  pizzaSettings.appendChild(sauceSetting);
+  pizzaTab2.appendChild(lblCustom);
+  pizzaTab2.appendChild(pizzaSettings);
+  orderingTabs.appendChild(pizzaTab2);
+  orderingArea.appendChild(orderingTabs);
+  pizza.appendChild(orderingArea);
+  tabTitle.appendChild(pPrebuiltPizzas);
+  orderDesc.appendChild(tabTitle);
+  orderDesc.appendChild(prebuiltHolder);
+  orderingArea.appendChild(orderDesc);
+  pizzaDisplay.appendChild(lblBonus);
+  pizzaDisplay.appendChild(pizzaDrawing);
+  yourToppings.appendChild(lblToppings);
+  yourToppings.appendChild(yourToppingsList);
+  pizzaDisplay.appendChild(yourToppings);
+  toppingsDisplay.appendChild(labelToppings);
+  toppingsDisplay.appendChild(toppingsListCreate);
+  customHolder.appendChild(pizzaDisplay);
+  customHolder.appendChild(toppingsDisplay);
+  endOrder.appendChild(pTotal);
+  endOrder.appendChild(orderBtn);
+  orderDesc.appendChild(customHolder);
+  orderDesc.appendChild(endOrder);
+}
+function EditHTML() {
+  var prebuiltPizza = document.getElementsByClassName("pizzaTab")[0];
+  var customizePizza = document.getElementsByClassName("pizzaTab")[1];
+  var buttons = document.getElementsByClassName("btn");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].innerHTML == "Add to Order") {
+      buttons[i].addEventListener("click", addToOrder);
+    }
+  }
+
+  prebuiltPizza.addEventListener("click", prebuiltTab);
+  customizePizza.addEventListener("click", customizeTab);
+  document.getElementById("selCrust").addEventListener("change", changeCrust);
+  document.getElementById("selSize").addEventListener("change", changeSize);
+  document.getElementById("selCheese").addEventListener("change", changeSize);
+  document.getElementById("selSauce").addEventListener("change", changeSize);
+}
 function createToppings() {
   var toppingsRow = document.createElement("div");
   toppingsRow.className = "toppingsRow";
