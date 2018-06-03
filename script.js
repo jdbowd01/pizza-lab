@@ -40,6 +40,8 @@ function createHTML() {
   var titleBar = document.createElement("h1");
   titleBar.innerHTML = "The Pizza Donut";
   titleBar.id = "titleBar";
+  var pizzaLogo = document.createElement("img");
+  pizzaLogo.src = "images/pizzaDonut/pizzaDonut.png";
   var mainTab1 = document.createElement("p");
   mainTab1.className = "mainTab";
   mainTab1.innerHTML = "Prebuilt Pizzas";
@@ -129,6 +131,7 @@ function createHTML() {
   orderDesc.id = "orderDesc";
   var tabTitle = document.createElement("h3");
   tabTitle.id = "tabTitle";
+  tabTitle.style = "background-image:url('images/misc/presetPizzaBack.jpg');";
   var pPrebuiltPizzas = document.createElement("p");
   pPrebuiltPizzas.innerHTML = "Prebuilt Pizzas";
   var prebuiltHolder = document.createElement("div");
@@ -191,6 +194,7 @@ function createHTML() {
   orderBtn.className = "btn";
   orderBtn.innerHTML = "Add to Order";
 
+  titleBar.appendChild(pizzaLogo);
   pizza.appendChild(titleBar);
   pizzaTab1.appendChild(mainTab1);
   orderingTabs.appendChild(pizzaTab1);
@@ -445,7 +449,6 @@ function updateToppingList(){
   }
 }
 function addToYourToppings(toAdd) {
-  //should look cleaner, but oh well
   var d = document.createElement("div");
   var l = document.createElement('label');
   var s = document.createElement('select');
@@ -472,7 +475,9 @@ function addToYourToppings(toAdd) {
   full.id = toAdd.split(' ').join('') + 'full';
   left.id = toAdd.split(' ').join('') + 'left';
   right.id = toAdd.split(' ').join('') + 'right';
-  full.style = 'background:#1286AA';
+  full.style = 'background:#0092c5;';
+  right.style = 'background:#fff;';
+  left.style = 'background:#fff;';
   full.addEventListener('click', halves);
   left.addEventListener('click', halves);
   right.addEventListener('click', halves);
@@ -502,6 +507,7 @@ function resetPizza() {
 function prebuiltTab(evt) {
   document.getElementById("endOrder").children[0].innerHTML = "Total: $0.00";
   document.getElementById("tabTitle").children[0].innerHTML = "Prebuilt Pizzas";
+  document.getElementById("tabTitle").style = "background-image:url('images/misc/presetPizzaBack.jpg');";
   document.getElementById("prebuiltHolder").style.display = "flex";
   document.getElementById("customHolder").style.display = "none";
   document.getElementById("orderBtn").style.display = "none";
@@ -510,6 +516,7 @@ function prebuiltTab(evt) {
 }
 function customizeTab(evt) {
   document.getElementById("tabTitle").children[0].innerHTML = "Customize Pizza";
+  document.getElementById("tabTitle").style = "background-image:url('images/misc/customizePizzaBack.jpg');";  
   document.getElementById("prebuiltHolder").style.display = "none";
   document.getElementById("customHolder").style.display = "flex";
   document.getElementById("orderBtn").style.display = "flex";
@@ -593,21 +600,21 @@ function halves(evt){
       + '-normal-01.png';
       document.getElementById(toppingsList[i].split(' ').join('') + 'left').style = "background:#FFF;";
       document.getElementById(toppingsList[i].split(' ').join('') + 'right').style = "background:#FFF;";
-      b.style = "background:#1286AA;";
+      b.style = "background:#0092c5;";
     }
     else if(b.id == toppingsList[i].split(' ').join('') + "left") {
       document.getElementById(toppingsList[i].split(' ').join('')).src = 'images/toppings/' + toppingsList[i].split(' ').join('-').toLowerCase()
       + '-left-01.png';
       document.getElementById(toppingsList[i].split(' ').join('') + 'full').style = "background:#FFF;";
       document.getElementById(toppingsList[i].split(' ').join('') + 'right').style = "background:#FFF;";
-      b.style = "background:#1286AA;";
+      b.style = "background:#0092c5;";
     }
     else if(b.id == toppingsList[i].split(' ').join('') + "right") {
       document.getElementById(toppingsList[i].split(' ').join('')).src = 'images/toppings/' + toppingsList[i].split(' ').join('-').toLowerCase()
       + '-right-01.png';
       document.getElementById(toppingsList[i].split(' ').join('') + 'left').style = "background:#FFF;";
       document.getElementById(toppingsList[i].split(' ').join('') + 'full').style = "background:#FFF;";
-      b.style = "background:#1286AA;";
+      b.style = "background:#0092c5;";
     }
   }
 }
