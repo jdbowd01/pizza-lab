@@ -3,28 +3,36 @@ var currentToppingsList = [];
 var pizzaPresets = [
   {
     text: "Meat Lover's",
-    price: "$5.00",
-    desc: "A plain cheese pizza topped with sausage, pepperoni, and ham."
+    price: "$11.00",
+    desc: "A plain cheese pizza topped with sausage, pepperoni, and ham.",
+    toppings: [{topping:"Pepperoni", amount:"Regular"}, {topping:"Sausage", amount:"Regular"}, {topping:"Ham", amount:"Regular"}]
   },
   {
     text: "Vegetarian",
-    price: "$6.00",
-    desc: "Garlic crusted double cheese pizza with light sauce, topped with onions, peppers, and spinach."
+    price: "$12.00",
+    desc: "Garlic crusted double cheese pizza with light sauce, topped with onions, peppers, and spinach.",
+    toppings: [{topping:"Onions", amount:"Regular"}, {topping:"Green Peppers", amount:"Regular"}, {topping:"Spinach", amount:"Regular"}],
+    extra: [{thing:"Crust", amount:"3"}, {thing:"Sauce", amount:"1"}, {thing:"Cheese", amount:"2"}]
   },
   {
     text: "Spicy Chicken Bacon",
-    price: "$6.50",
-    desc: "Stuffed crust pizza with double cheese, topped with chicken and bacon, with a few jalapenos."
+    price: "$13.00",
+    desc: "Stuffed crust pizza with double cheese, topped with chicken and bacon, with a few jalapenos.",
+    toppings: [ {topping:"Chicken", amount:"Regular"}, {topping:"Bacon", amount:"Regular"}, {topping:"Jalapeno Peppers", amount:"Light"}],
+    extra: [{thing:"Crust", amount:"2"}, {thing:"Cheese", amount:"2"}]
   },
   {
     text: "Slightly Less Supreme",
-    price: "$6.00",
-    desc: "A plain cheese pizza topped with sausage, pepperoni, peppers, and onions."
+    price: "$12.00",
+    desc: "A plain cheese pizza topped with sausage, pepperoni, peppers, and onions.",
+    toppings: [{topping:"Pepperoni", amount:"Regular"}, {topping:"Sausage", amount:"Regular"}, {topping:"Green Peppers", amount:"Regular"}, {topping:"Onions", amount:"Regular"}]
   },
   {
     text: "Anchovy Ahoy",
-    price: "$5.00",
-    desc: "A thin crusted double cheese pizza with anchovies, onions, and peppers finishing the dish off."
+    price: "$11.00",
+    desc: "A thin crusted double cheese pizza with anchovies, onions, and peppers finishing the dish off.",
+    toppings: [{topping:"Anchovies", amount:"Regular"}, {topping:"Onions", amount:"Regular"}, {topping:"Green Peppers", amount:"Regular"}],
+    extra: [{thing:"Crust", amount:"1"}, {thing:"Sauce", amount:"1"}, {thing:"Cheese", amount:"2"}]
   },
 ];
 var picWidth = "80%";
@@ -147,16 +155,16 @@ function createHTML() {
     pText.innerHTML = pizzaPresets[i].text;
     var pPrice = document.createElement("p");
     pPrice.innerHTML = pizzaPresets[i].price;
-    var addOrder = document.createElement("div");
-    addOrder.className = "btn";
-    addOrder.innerHTML = "Add to Order";
+    var addCustom = document.createElement("div");
+    addCustom.className = "btn";
+    addCustom.innerHTML = "Add to Customize";
     var prebuiltDesc = document.createElement("p");
     prebuiltDesc.className = "prebuiltPizzaDesc";
     prebuiltDesc.innerHTML = pizzaPresets[i].desc;
     prebuiltPizza.appendChild(prebuiltPizzaPicture);
     prebuiltPizza.appendChild(pText);
     prebuiltPizza.appendChild(pPrice);
-    prebuiltPizza.appendChild(addOrder);
+    prebuiltPizza.appendChild(addCustom);
     prebuiltPizza.appendChild(prebuiltDesc);
     prebuiltHolder.appendChild(prebuiltPizza);
   }
@@ -257,14 +265,17 @@ function EditHTML() {
     if (buttons[i].innerHTML == "Add to Order") {
       buttons[i].addEventListener("click", addToOrder);
     }
+    else if (buttons[i].innerHTML == "Add to Customize") {
+      buttons[i].addEventListener("click", addToCustomize);
+    }
   }
 
   prebuiltPizza.addEventListener("click", prebuiltTab);
   customizePizza.addEventListener("click", customizeTab);
   document.getElementById("selCrust").addEventListener("change", changeCrust);
   document.getElementById("selSize").addEventListener("change", changeSize);
-  document.getElementById("selCheese").addEventListener("change", changeSize);
-  document.getElementById("selSauce").addEventListener("change", changeSize);
+  document.getElementById("selCheese").addEventListener("change", changeCheese);
+  document.getElementById("selSauce").addEventListener("change", changeSauce);
 }
 function createToppings() {
   var toppingsRow = document.createElement("div");
@@ -302,10 +313,12 @@ function FillPizza() {
   sauce.src = 'images/sauces/normal-01.png';
   sauce.style = "z-index:3; position:absolute;top:0px; left:0px;";
   sauce.className = "imgPizza";
+  sauce.id = 'sauce';
   var cheese = document.createElement("img");
   cheese.src = 'images/cheeses/normal-01.png';
   cheese.style = "z-index:4; position:absolute;top:0px; left:0px;";
   cheese.className = "imgPizza";
+  cheese.id = 'cheese';
   pizza.appendChild(crust);
   pizza.appendChild(sauce);
   pizza.appendChild(cheese);
@@ -492,6 +505,17 @@ function removeFromYourToppings(toRemove) {
   document.getElementById('yourToppingsList').removeChild(toRemove);
 }
 function resetPizza() {
+  for(var i = 0; i < toppingsList.length; i++) {
+    document.getElementsByClassName("topping")[i].children[0].checked = false;
+  }
+  for(var j = 0; j < currentToppingsList.length; j++) {
+    removeFromYourToppings(document.getElementById("yourToppingsList").lastChild);
+  }
+  document.getElementById("selSize").value = "medium";
+  document.getElementById("selCrust").value = "regular";
+  document.getElementById("selCheese").value = "Normal";
+  document.getElementById("selSauce").value = "Normal";
+
   var pizza = document.getElementById('pizzaDrawing');  
   while(pizza.hasChildNodes()) {
     pizza.removeChild(pizza.lastChild)
@@ -525,7 +549,7 @@ function customizeTab(evt) {
   document.getElementById("endOrder").children[0].style.display = "flex";  
 }
 function changeCrust(evt){
-  var x = evt.target.value;
+  var x = document.getElementById("selCrust").value;
   if(x == 'regular'){
     document.getElementById('crust').src='images/crusts/regular-01.png';
   }
@@ -537,6 +561,32 @@ function changeCrust(evt){
   }
   else if(x == 'garlic'){
     document.getElementById('crust').src='images/crusts/garlic-01.png';
+  }
+  setPrice();
+}
+function changeCheese(evt){
+  var x = document.getElementById("selCheese").value;
+  if(x == 'Normal'){
+    document.getElementById('cheese').src='images/cheeses/normal-01.png';
+  }
+  else if(x == 'Light'){
+    document.getElementById('cheese').src='images/cheeses/light-01.png';
+  }
+  else if(x == 'Double'){
+    document.getElementById('cheese').src='images/cheeses/double-01.png';
+  }
+  setPrice();
+}
+function changeSauce(evt){
+  var x = document.getElementById("selSauce").value;
+  if(x == 'Normal'){
+    document.getElementById('sauce').src='images/sauces/normal-01.png';
+  }
+  else if(x == 'Light'){
+    document.getElementById('sauce').src='images/sauces/light-01.png';
+  }
+  else if(x == 'Double'){
+    document.getElementById('sauce').src='images/sauces/double-01.png';
   }
   setPrice();
 }
@@ -592,6 +642,26 @@ function addToPizza(evt) {
   drawPizza(found, removed);
   setPrice();
 }
+function addToCustomize(evt) {
+  resetPizza();
+  var pizzaNum = (evt.path[1].id.substr(13)) - 1;
+  var pizza = pizzaPresets[pizzaNum];
+  for(var i = 0; i < pizza.toppings.length; i++) {
+    document.getElementById("tpg" + toppingsList.indexOf(pizza.toppings[i].topping)).checked = "true";
+    currentToppingsList.push(pizza.toppings[i].topping);
+    drawPizza(false, null);
+  }
+  try {
+    for(var j = 0; j < pizza.extra.length; j++) {
+      document.getElementById("sel" + pizza.extra[j].thing).children[pizza.extra[j].amount].selected = "selected";
+    }
+  } catch (e) {}
+  changeCrust(null);
+  changeSize(null);
+  changeCheese(null);
+  changeSauce(null);
+  customizeTab(null);
+}
 function halves(evt){
   var b = evt.target;
   for(var i = 0; i < toppingsList.length; i++) {
@@ -636,15 +706,5 @@ function addToOrder(evt) {
   }
   alert("Thanks for your purchase! That will be " + document.getElementById("endOrder").children[0].innerHTML.substr(7) + "!");
 
-  for(var i = 0; i < toppingsList.length; i++) {
-    document.getElementsByClassName("topping")[i].children[0].checked = false;
-  }
-  for(var j = 0; j < currentToppingsList.length; j++) {
-    removeFromYourToppings(document.getElementById("yourToppingsList").lastChild);
-  }
-  document.getElementById("selSize").value = "medium";
-  document.getElementById("selCrust").value = "regular";
-  document.getElementById("selCheese").value = "Normal";
-  document.getElementById("selSauce").value = "Normal";
   resetPizza();  
 }
